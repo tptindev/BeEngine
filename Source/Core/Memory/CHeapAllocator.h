@@ -7,6 +7,7 @@ class CHeapAllocator: public IAllocator
 {
 public:
     CHeapAllocator();
+    ~CHeapAllocator();
 
     // IAllocator interface
 public:
