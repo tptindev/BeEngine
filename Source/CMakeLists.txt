@@ -19,6 +19,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE net_module)
 add_subdirectory(Audio)
 target_link_libraries(${PROJECT_NAME} PRIVATE audio_module)
 
+add_subdirectory(Engine)
+target_link_libraries(${PROJECT_NAME} PRIVATE engine_module)
+
 # Specify include directories for the main executable
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Core

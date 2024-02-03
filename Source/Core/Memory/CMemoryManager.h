@@ -4,8 +4,12 @@
 
 class CMemoryManager
 {
-public:
+private:
+    static CMemoryManager* s_instance;
     CMemoryManager();
+
+public:
+    static CMemoryManager* instance();
 };
 
 #endif // CMEMORYMANAGER_H
