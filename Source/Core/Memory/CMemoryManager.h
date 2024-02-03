@@ -13,10 +13,11 @@ private:
     CStackAllocator *m_stack_alloc;
     CHeapAllocator *m_heap_alloc;
 public:
-    enum MEM_ALLOC_SEG: bool
+    enum MEM_ALLOC_SEG: unsigned char
     {
         STACK = 0,
-        HEAP  = 1
+        HEAP,
+        POOL
     };
 
     CMemoryManager(CMemoryManager &other) = delete;
