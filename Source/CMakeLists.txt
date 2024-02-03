@@ -19,6 +19,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE net_module)
 add_subdirectory(Audio)
 target_link_libraries(${PROJECT_NAME} PRIVATE audio_module)
 
+add_subdirectory(Physics)
+
 add_subdirectory(Engine)
 target_link_libraries(${PROJECT_NAME} PRIVATE engine_module)
 
