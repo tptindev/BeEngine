@@ -12,11 +12,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 #
 set(LIBRARY_DIR
     "${CMAKE_SOURCE_DIR}/3rd/libs/GLFW"
-    "${CMAKE_SOURCE_DIR}/3rd/libs/SDL2")
+    "${CMAKE_SOURCE_DIR}/3rd/libs/SDL2"
+    "${CMAKE_SOURCE_DIR}/3rd/libs/TinyXML2")
 
 set(INCLUDE_DIR
     "${CMAKE_SOURCE_DIR}/3rd/include/GLFW"
-    "${CMAKE_SOURCE_DIR}/3rd/include/SDL2")
+    "${CMAKE_SOURCE_DIR}/3rd/include/SDL2"
+    "${CMAKE_SOURCE_DIR}/3rd/include/TinyXML2")
 
 set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lopengl32 -lglfw3 -lgdi32")
 

@@ -7,4 +7,5 @@ add_library(utils_module ${SOURCE_FILES})
 target_include_directories(utils_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/Logger
+    ${CMAKE_CURRENT_SOURCE_DIR}/Parsers
 )
