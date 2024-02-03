@@ -1,10 +1,13 @@
 #include "CEngine.h"
 #include <LoggerDefines.h>
+#include <CMemoryManager.h>
 
 CEngine* CEngine::s_instance = nullptr;
 CEngine::CEngine()
+    :m_running{nullptr}
 {
     _DEBUG("%s", __FUNCTION__);
+    m_running = STACK_ALLOC(bool,sizeof(bool));
 }
 
 CEngine::~CEngine()

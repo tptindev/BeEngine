@@ -3,7 +3,7 @@
 CMemoryManager *CMemoryManager::s_instance = nullptr;
 CMemoryManager::CMemoryManager()
 {
-
+    m_stack_alloc = new CStackAllocator(1024);
 }
 
 CMemoryManager::~CMemoryManager()
