@@ -6,6 +6,7 @@
 #include <mutex>
 #include <thread>
 #include <Utils.h>
+#include <memory.h>
 #include "LoggerEnums.h"
 
 class CLogger

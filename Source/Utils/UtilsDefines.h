@@ -1,5 +1,8 @@
+#include <cstring>
+
 #define SIZE_OF_ARRAY(arr) sizeof(arr) / sizeof(*(arr))
 #define stringify(name) #name
+
 
 #ifdef _WIN32
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
