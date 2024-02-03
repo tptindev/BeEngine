@@ -33,6 +33,11 @@ void *CStackAllocator::allocate(size_t size)
     return ptr;
 }
 
+void CStackAllocator::deallocate(void *)
+{
+    // do nothing
+}
+
 size_t CStackAllocator::capacity() const
 {
     return m_capacity;

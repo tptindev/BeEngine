@@ -1,9 +1,9 @@
 #ifndef CSTACKALLOCATOR_H
 #define CSTACKALLOCATOR_H
 
-#include <stdint.h>
+#include "IAllocator.h"
 
-class CStackAllocator
+class CStackAllocator: public IAllocator
 {
 private:
     void* m_data;    // Pointer to the allocated memory
@@ -14,10 +14,13 @@ public:
     CStackAllocator(size_t size);
     ~CStackAllocator();
 
-    void* allocate(size_t size);
-
     size_t capacity() const;
     size_t top() const;
+
+    // IAllocator interface
+public:
+    virtual void* allocate(size_t size) override;
+    virtual void deallocate(void*) override;
 };
 
 #endif // CSTACKALLOCATOR_H
