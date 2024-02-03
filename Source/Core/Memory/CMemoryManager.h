@@ -9,6 +9,9 @@ private:
     CMemoryManager();
 
 public:
+    CMemoryManager(CMemoryManager &other) = delete;
+    void operator=(const CMemoryManager &) = delete;
+    ~CMemoryManager();
     static CMemoryManager* instance();
 };
 

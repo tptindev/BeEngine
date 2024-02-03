@@ -6,6 +6,11 @@ CMemoryManager::CMemoryManager()
 
 }
 
+CMemoryManager::~CMemoryManager()
+{
+
+}
+
 CMemoryManager *CMemoryManager::instance()
 {
     return s_instance = (s_instance == nullptr)? new CMemoryManager: s_instance;
