@@ -8,3 +8,5 @@ target_include_directories(core_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/Memory
 )
+
+target_link_libraries(core_module PRIVATE utils_module)
