@@ -1,6 +1,6 @@
-#include "StackAllocator.h"
+#include "CStackAllocator.h"
 
-StackAllocator::StackAllocator()
+CStackAllocator::CStackAllocator()
 {
 
 }

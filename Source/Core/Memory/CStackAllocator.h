@@ -1,11 +1,14 @@
-#ifndef STACKALLOCATOR_H
-#define STACKALLOCATOR_H
+#ifndef CSTACKALLOCATOR_H
+#define CSTACKALLOCATOR_H
 
 
-class StackAllocator
+
+class CStackAllocator
 {
+private:
+
 public:
-    StackAllocator();
+    CStackAllocator();
 };
 
-#endif // STACKALLOCATOR_H
+#endif // CSTACKALLOCATOR_H

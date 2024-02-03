@@ -1,6 +1,6 @@
 set(CMAKE_VERBOSE_MAKEFILE ON)
 cmake_minimum_required(VERSION 3.27.6)
-project(BeEnggine VERSION 0.1.0 DESCRIPTION "Game engine from BeStudio" LANGUAGES C CXX)
+project(BeEngine VERSION 0.1.0 DESCRIPTION "Game engine from BeStudio" LANGUAGES C CXX)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
