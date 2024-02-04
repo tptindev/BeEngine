@@ -4,6 +4,7 @@
 #include <iostream>
 #include <Utils.h>
 #include "ILinkedList.h"
+#include "CIterator.h"
 #include "SNode.h"
 
 template<typename T>
@@ -34,7 +35,18 @@ public:
                 i++;
             }
         }
+
         return out;
+    }
+
+    CIterator<T> begin()
+    {
+        return CIterator<T>(this->m_head);
+    }
+
+    CIterator<T> end()
+    {
+        return CIterator<T>(nullptr);
     }
 
     T &front()
