@@ -4,8 +4,6 @@
 #include <iostream>
 #include <Utils.h>
 #include "ILinkedList.h"
-#include "CIterator.h"
-#include "SNode.h"
 
 template<typename T>
 class CSinglyLinkedList: public ILinkedList<T>
@@ -37,26 +35,6 @@ public:
         }
 
         return out;
-    }
-
-    CIterator<T> begin()
-    {
-        return CIterator<T>(this->m_head);
-    }
-
-    CIterator<T> end()
-    {
-        return CIterator<T>(nullptr);
-    }
-
-    T &front()
-    {
-        return this->m_head->data;
-    }
-
-    T &back()
-    {
-        return this->m_tail->data;
     }
 
     template<class ...TArgs>
