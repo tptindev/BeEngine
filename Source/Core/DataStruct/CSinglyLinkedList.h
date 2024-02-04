@@ -27,11 +27,12 @@ public:
         if(empty())
         {
             m_head = el;
-            m_head->next = m_tail;
+            m_tail = m_head;
         }
         else
         {
             m_tail = el;
+            m_tail->next = el;
         }
 
         m_count++;
