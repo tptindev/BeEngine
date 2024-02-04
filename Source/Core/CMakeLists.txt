@@ -1,10 +1,7 @@
 file(GLOB_RECURSE SOURCE_FILES "*.cpp" "*.h")
 
 # Define the library in utils
-add_library(core_module ${SOURCE_FILES}
-    DataStruct/CSinglyLinkedList.h DataStruct/CSinglyLinkedList.cpp
-    DataStruct/CDoublyLinkedList.h DataStruct/CDoublyLinkedList.cpp
-    DataStruct/SNode.h)
+add_library(core_module ${SOURCE_FILES})
 
 # Include directories, if needed
 target_include_directories(core_module PUBLIC

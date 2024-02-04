@@ -5,7 +5,10 @@
 class CDoublyLinkedList
 {
 public:
-    CDoublyLinkedList();
+    CDoublyLinkedList()
+    {
+
+    }
 };
 
 #endif // CDOUBLYLINKEDLIST_H
