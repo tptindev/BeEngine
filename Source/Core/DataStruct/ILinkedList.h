@@ -1,12 +1,17 @@
 #ifndef ILINKEDLIST_H
 #define ILINKEDLIST_H
 
+#include <stdint.h>
+#include "SNode.h"
+
+template<typename T>
 class ILinkedList
 {
-public:
-    virtual void push_back() {}
-    virtual void pop_back() {}
-    virtual bool empty() = 0;
+protected:
+    uint32_t  m_count;
+    SNode<T>* m_head;
+    SNode<T>* m_tail;
+
 };
 
 #endif // ILINKEDLIST_H
