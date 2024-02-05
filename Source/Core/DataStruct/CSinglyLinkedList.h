@@ -1,8 +1,6 @@
 #ifndef CSINGLYLINKEDLIST_H
 #define CSINGLYLINKEDLIST_H
 
-#include <iostream>
-#include <Utils.h>
 #include "ILinkedList.h"
 
 template<typename T>
@@ -16,32 +14,11 @@ public:
         this->m_tail = nullptr;
     }
 
-    friend std::ostream &operator<<(std::ostream &out, CSinglyLinkedList &list)
-    {
-        out << "[" << &list << "] Singly Linked List: " << std::endl;
-        if(list.empty())
-        {
-            out << "EMPTY" << std::endl;
-        }
-        else
-        {
-            int i = 0;;
-            SNode<T> *ptr = list.m_head;
-            while (ptr != nullptr) {
-                out << "[" << ptr << "][" << i << "][" << ptr->data << "]" << std::endl;
-                ptr = ptr->next;
-                i++;
-            }
-        }
-
-        return out;
-    }
-
     template<class ...TArgs>
     void emplace_front(TArgs&& ...args)
     {
         SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
-        if(empty())
+        if(this->empty())
         {
             this->m_head = el;
         }
@@ -57,7 +34,7 @@ public:
     void emplace_back(TArgs&& ...args)
     {
         SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
-        if(empty())
+        if(this->empty())
         {
             this->m_head = el;
         }
@@ -81,7 +58,7 @@ public:
     void push_front(T data)
     {
         SNode<T>* el = new SNode<T>(data);
-        if(empty())
+        if(this->empty())
         {
             this->m_head = el;
         }
@@ -95,7 +72,7 @@ public:
     void push_back(T data)
     {
         SNode<T>* el = new SNode<T>(data);
-        if(empty())
+        if(this->empty())
         {
             this->m_head = el;
         }
@@ -161,16 +138,19 @@ public:
         this->m_count--;
     }
 
-//    template<class ...TArgs>
-//    void emplace(TArgs&&...args)
-//    {
-//        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
-
-//    }
-
-    bool empty()
+    template<class ...TArgs>
+    void emplace(const CIterator<T> position, TArgs&&...args)
     {
-        return (this->m_count < 1 && this->m_head == nullptr);
+        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
+        CIterator<T> it = this->begin();
+        while (it != this->end())
+        {
+            if(it == position)
+            {
+                break;
+            }
+            ++it;
+        }
     }
 
     void clear()

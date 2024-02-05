@@ -35,6 +35,12 @@ public:
     {
         return m_it_head != other.m_it_head;
     }
+
+    // Overload != operator to check for inequality
+    bool operator==(const CIterator& other) const
+    {
+        return m_it_head == other.m_it_head;
+    }
 };
 
 

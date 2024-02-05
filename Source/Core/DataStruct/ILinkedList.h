@@ -1,7 +1,9 @@
 #ifndef ILINKEDLIST_H
 #define ILINKEDLIST_H
 
+#include <iostream>
 #include <stdint.h>
+#include <Utils.h>
 #include "SNode.h"
 #include "CIterator.h"
 
@@ -14,6 +16,27 @@ protected:
     SNode<T>* m_tail;
 
 public:
+    friend std::ostream &operator<<(std::ostream &out, ILinkedList *list)
+    {
+        out << "[" << &list << "] Linked List: " << std::endl;
+        if(list->empty())
+        {
+            out << "EMPTY" << std::endl;
+        }
+        else
+        {
+            int i = 0;;
+            SNode<T> *ptr = list->m_head;
+            while (ptr != nullptr) {
+                out << "[" << ptr << "][" << i << "][" << ptr->data << "]" << std::endl;
+                ptr = ptr->next;
+                i++;
+            }
+        }
+
+        return out;
+    }
+
     CIterator<T> begin()
     {
         return CIterator<T>(m_head);
@@ -32,6 +55,11 @@ public:
     T &back()
     {
         return m_tail->data;
+    }
+
+    bool empty()
+    {
+        return (this->m_count < 1 && this->m_head == nullptr);
     }
 };
 
