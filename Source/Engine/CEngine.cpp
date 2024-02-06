@@ -4,10 +4,9 @@
 
 CEngine* CEngine::s_instance = nullptr;
 CEngine::CEngine()
-    :m_running{nullptr}
+    :m_running(STACK_ALLOC(bool,false))
 {
     _DEBUG("%s", __FUNCTION__);
-    m_running = STACK_ALLOC(bool,sizeof(bool));
 }
 
 CEngine::~CEngine()
@@ -22,6 +21,7 @@ CEngine *CEngine::instance()
 
 bool CEngine::initialize()
 {
+    m_running = true;
     return true;
 }
 

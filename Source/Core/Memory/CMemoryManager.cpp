@@ -1,17 +1,19 @@
 #include "CMemoryManager.h"
 #include <Utils.h>
+#include "CStackAllocator.h"
 
 CMemoryManager *CMemoryManager::s_instance = nullptr;
 CMemoryManager::CMemoryManager()
 {
-    m_stack_alloc = new CStackAllocator(1024);
-    m_heap_alloc  = new CHeapAllocator();
+    m_allocators[ALLOC_KINDS::STACK] = new CStackAllocator(1024);
 }
 
 CMemoryManager::~CMemoryManager()
 {
-    safeRelease(m_stack_alloc);
-    safeRelease(m_heap_alloc);
+    for(auto it: m_allocators)
+    {
+        safeRelease(it.second);
+    }
 }
 
 CMemoryManager *CMemoryManager::instance()

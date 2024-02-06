@@ -1,26 +1,25 @@
 #ifndef CSTACKALLOCATOR_H
 #define CSTACKALLOCATOR_H
 
-#include "IAllocator.h"
+#include "AAllocator.h"
 
-class CStackAllocator: public IAllocator
+class CStackAllocator: public AAllocator
 {
 private:
-    void* m_data;    // Pointer to the allocated memory
-    size_t m_capacity;  // Total capacity of the stack
+    char   m_data;    // Pointer to the allocated memory
     size_t m_top;       // Current top of the stack
 
 public:
+    CStackAllocator();
     CStackAllocator(size_t size);
     ~CStackAllocator();
 
-    size_t capacity() const;
     size_t top() const;
 
     // IAllocator interface
 public:
-    virtual void* allocate(size_t size) override;
-    virtual void deallocate(void*) override;
+    virtual void* allocate(size_t) override;
+    virtual void deallocate(void*, size_t) override;
 };
 
 #endif // CSTACKALLOCATOR_H

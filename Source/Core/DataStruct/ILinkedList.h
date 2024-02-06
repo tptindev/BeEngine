@@ -34,6 +34,8 @@ public:
             }
         }
 
+        out << "Total: " << list->count() << std::endl;
+
         return out;
     }
 
@@ -61,6 +63,12 @@ public:
     {
         return (this->m_count < 1 && this->m_head == nullptr);
     }
+
+    uint32_t count() const
+    {
+        return m_count;
+    }
 };
+
 
 #endif // ILINKEDLIST_H

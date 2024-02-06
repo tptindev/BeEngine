@@ -1,8 +1,9 @@
 #ifndef CMEMORYMANAGER_H
 #define CMEMORYMANAGER_H
 
-#include "CStackAllocator.h"
-#include "CHeapAllocator.h"
+#include <map>
+#include "AAllocator.h"
+#include "CObjWrapper.h"
 
 class CMemoryManager
 {
@@ -10,13 +11,11 @@ class CMemoryManager
 private:
     static CMemoryManager* s_instance;
     CMemoryManager();
-    CStackAllocator *m_stack_alloc;
-    CHeapAllocator *m_heap_alloc;
+    std::map<unsigned char, AAllocator*> m_allocators;
 public:
-    enum MEM_ALLOC_SEG: unsigned char
+    enum ALLOC_KINDS: unsigned char
     {
         STACK = 0,
-        HEAP,
         POOL
     };
 
@@ -25,21 +24,22 @@ public:
     ~CMemoryManager();
     static CMemoryManager* instance();
 
-    template<typename T>
-    T* alloc(MEM_ALLOC_SEG seg, size_t size)
+    template<typename T, typename ...Args>
+    CObjWrapper<T> alloc(ALLOC_KINDS kind, Args&&...args)
     {
-        switch (seg) {
-        case MEM_ALLOC_SEG::STACK:
-            return static_cast<T*>(m_stack_alloc->allocate(size));
-        case MEM_ALLOC_SEG::HEAP:
-            return static_cast<T*>(m_heap_alloc->allocate(size));
-        default:
-            return nullptr;
-        }
+        T* ptr = static_cast<T*>(m_allocators[kind]->allocate(sizeof(T)));
+        *ptr = T(std::forward<Args>(args)...);
+
+        return CObjWrapper<T>(ptr);
+    }
+
+    template<typename T>
+    void release(ALLOC_KINDS kind, T* ptr)
+    {
+        m_allocators[kind]->deallocate(ptr, sizeof(T));
     }
 };
 
-#define STACK_ALLOC(T,SIZE) CMemoryManager::instance()->alloc<T>(CMemoryManager::MEM_ALLOC_SEG::STACK,SIZE)
-#define HEAP_ALLOC(T,SIZE) CMemoryManager::instance()->alloc<T>(CMemoryManager::MEM_ALLOC_SEG::HEAP,SIZE)
+#define STACK_ALLOC(T,...) CMemoryManager::instance()->alloc<T>(CMemoryManager::ALLOC_KINDS::STACK,##__VA_ARGS__)
 
 #endif // CMEMORYMANAGER_H

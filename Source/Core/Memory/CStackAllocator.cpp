@@ -1,10 +1,25 @@
 #include "CStackAllocator.h"
 #include <cstdlib>
+#include <cstring>
 #include <LoggerDefines.h>
 
-CStackAllocator::CStackAllocator(size_t size)
-    :m_capacity(size), m_top(0)
+CStackAllocator::CStackAllocator()
+    :m_top(0)
 {
+    _DEBUG("Entry");
+    m_capacity = 0;
+    if(!m_data)
+    {
+        _DEBUG("Failed to allocate memory for StackAllocator!");
+        std::exit(EXIT_FAILURE);
+    }
+}
+
+CStackAllocator::CStackAllocator(size_t size)
+    :m_top(0)
+{
+    _DEBUG("Entry");
+    m_capacity = size;
     if(!m_data)
     {
         _DEBUG("Failed to allocate memory for StackAllocator!");
@@ -14,7 +29,8 @@ CStackAllocator::CStackAllocator(size_t size)
 
 CStackAllocator::~CStackAllocator()
 {
-    std::free(m_data);
+    _DEBUG("Entry");
+    memset(&m_data, 0x0, capacity());
 }
 
 void *CStackAllocator::allocate(size_t size)
@@ -26,21 +42,15 @@ void *CStackAllocator::allocate(size_t size)
         std::exit(EXIT_FAILURE);
     }
 
-    void *ptr = static_cast<void*>((char*)m_data + m_top);
-
+    void *ptr = static_cast<void*>(&m_data + m_top);
     m_top += size;
 
     return ptr;
 }
 
-void CStackAllocator::deallocate(void *)
+void CStackAllocator::deallocate(void *, size_t size)
 {
     // do nothing
-}
-
-size_t CStackAllocator::capacity() const
-{
-    return m_capacity;
 }
 
 size_t CStackAllocator::top() const

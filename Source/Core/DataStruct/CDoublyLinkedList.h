@@ -13,6 +13,51 @@ public:
         this->m_head = nullptr;
         this->m_tail = nullptr;
     }
+
+    template<class ...TArgs>
+    void emplace_front(TArgs&& ...args)
+    {
+        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
+        if(this->empty())
+        {
+            this->m_head = el;
+        }
+        else
+        {
+            this->m_head->previous = el;
+            el->next = this->m_head;
+            this->m_head = el;
+        }
+        this->m_count++;
+    }
+
+    template<class ...TArgs>
+    void emplace_back(TArgs&& ...args)
+    {
+        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
+        if(this->empty())
+        {
+            this->m_head = el;
+        }
+        else
+        {
+            if(this->m_tail == nullptr)
+            {
+                this->m_tail = el;
+                this->m_tail->previous = this->m_head;
+                this->m_head->next = this->m_tail;
+            }
+            else
+            {
+                el->previous = this->m_tail;
+                this->m_tail->next = el;
+                this->m_tail = el;
+            }
+        }
+
+        this->m_count++;
+    }
+
     void push_front(T data)
     {
         SNode<T> *el = new SNode<T>(data);
@@ -26,6 +71,7 @@ public:
             el->next = this->m_head;
             this->m_head = el;
         }
+        this->m_count++;
     }
 
     void push_back(T data)
@@ -63,10 +109,11 @@ public:
         }
 
         SNode<T> *front = this->m_head;
-        safeRelease(front);
 
-        this->m_head = this->m_head->next;
+        this->m_head = front->next;
         this->m_head->previous = nullptr;
+
+        safeRelease(front);
         this->m_count--;
     }
 
