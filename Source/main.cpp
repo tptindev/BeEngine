@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     list.push_front(7);
     list.push_front(1);
     list.push_front(9);
-//    list.emplace_front(33);
-//    list.emplace_back(99);
+    list.emplace_front(33);
+    list.emplace_back(99);
 
     std::cout << &list <<std::endl;
     list.pop_front();

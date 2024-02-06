@@ -9,10 +9,8 @@ class CIterator
 private:
     SNode<T>* m_it_head;
 public:
-    CIterator(SNode<T>* head)
-    {
-        m_it_head = head;
-    }
+    CIterator(): m_it_head(nullptr){}
+    CIterator(SNode<T>* head): m_it_head(head){}
 
     // Overload * operator to access the value
     T& operator*()
@@ -36,7 +34,7 @@ public:
         return m_it_head != other.m_it_head;
     }
 
-    // Overload != operator to check for inequality
+    // Overload == operator to check for inequality
     bool operator==(const CIterator& other) const
     {
         return m_it_head == other.m_it_head;

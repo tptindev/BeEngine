@@ -138,6 +138,33 @@ public:
         safeRelease(tail);
         this->m_count--;
     }
+
+    CIterator<T> erase(CIterator<T> position)
+    {
+        CIterator<T> it = this->begin();
+        while (it != this->end())
+        {
+            if(it == position)
+            {
+                return it;
+            }
+            ++it;
+        }
+        return this->end();
+    }
+
+    CIterator<T> erase(CIterator<T> first, CIterator<T> last)
+    {
+        while (first != last)
+        {
+            if(first == last)
+            {
+                return first;
+            }
+            ++first;
+        }
+        return this->end();
+    }
 };
 
 #endif // CDOUBLYLINKEDLIST_H

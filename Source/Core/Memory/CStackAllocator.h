@@ -7,7 +7,7 @@ class CStackAllocator: public AAllocator
 {
 private:
     char   m_data;    // Pointer to the allocated memory
-    size_t m_top;       // Current top of the stack
+    size_t m_top;     // Current top of the stack
 
 public:
     CStackAllocator();
