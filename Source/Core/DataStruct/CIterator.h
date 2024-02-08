@@ -43,7 +43,6 @@ public:
     // Overload == operator to check for inequality
     bool operator==(const CIterator& other) const
     {
-        std::cout << m_data << ", " << other.m_data << std::endl;
         return m_data == other.m_data;
     }
     SNode<T> *data() const

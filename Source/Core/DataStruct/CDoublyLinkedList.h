@@ -22,15 +22,15 @@ public:
     template<class ...TArgs>
     void emplace_front(TArgs&& ...args)
     {
-        SNode<T>* el = new SNode<T>(T(std::forward<TArgs>(args)...));
-        if(this->empty())
+        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
+        if(this->m_head == nullptr)
         {
-            this->m_head = el;
+            this->m_head = this->m_tail = el;
         }
         else
         {
-            this->m_head->pre = el;
             el->next = this->m_head;
+            this->m_head->pre = el;
             this->m_head = el;
         }
         this->m_count++;
@@ -39,25 +39,16 @@ public:
     template<class ...TArgs>
     void emplace_back(TArgs&& ...args)
     {
-        SNode<T>* el = new SNode<T>(T(std::forward<TArgs>(args)...));
-        if(this->empty())
+        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
+        if(this->m_head == nullptr)
         {
-            this->m_head = el;
+            this->m_head = this->m_tail = el;
         }
         else
         {
-            if(this->m_tail == nullptr)
-            {
-                this->m_tail = el;
-                this->m_tail->pre = this->m_head;
-                this->m_head->next = this->m_tail;
-            }
-            else
-            {
-                el->pre = this->m_tail;
-                this->m_tail->next = el;
-                this->m_tail = el;
-            }
+            this->m_tail->next = el;
+            el->pre = this->m_tail;
+            this->m_tail = el;
         }
 
         this->m_count++;
@@ -65,58 +56,26 @@ public:
 
     void push_front(T data)
     {
-        SNode<T> *el = new SNode<T>(data);
-        if (this->empty())
-        {
-            this->m_head = el;
-        }
-        else
-        {
-            this->m_head->pre = el;
-            el->next = this->m_head;
-            this->m_head = el;
-        }
-        this->m_count++;
+        emplace_front(data);
     }
 
     void push_back(T data)
     {
-        SNode<T> *el = new SNode<T>(data);
-        if (this->empty())
-        {
-            this->m_head = el;
-        }
-        else
-        {
-            if (this->m_tail == nullptr)
-            {
-                this->m_tail = el;
-                this->m_tail->pre = this->m_head;
-                this->m_head->next = this->m_tail;
-            }
-            else
-            {
-                el->pre = this->m_tail;
-                this->m_tail->next = el;
-                this->m_tail = el;
-            }
-        }
-
-        this->m_count++;
+        emplace_back(data);
     }
 
     void pop_front()
     {
-        if (this->empty())
+        if (this->m_head == nullptr)
         {
             std::cerr << "List is empty. Cannot pop_front.\n";
             return;
         }
 
-        if (this->m_head->next == nullptr)
+        if (this->m_head == this->m_tail)
         {
             delete this->m_head;
-            this->m_head = nullptr;
+            this->m_head = this->m_tail = nullptr;
         }
         else
         {
@@ -130,17 +89,16 @@ public:
 
     void pop_back()
     {
-        if (this->empty())
+        if (this->m_head == nullptr)
         {
             std::cerr << "List is empty. Cannot pop_back.\n";
             return;
         }
 
-        if (this->m_head->pre == nullptr && this->m_head->next == nullptr)
+        if (this->m_head == this->m_tail)
         {
-            this->m_count = 1;
-            delete this->m_head;
-            this->m_head = nullptr;
+            delete this->m_tail;
+            this->m_tail = nullptr;
         }
         else
         {
@@ -154,24 +112,13 @@ public:
 
     CIterator<T> erase(CIterator<T> position)
     {
-        if(position == this->begin())
-        {
-            this->pop_front();
-            return this->begin();
-        }
-        else if(position == this->end())
-        {
-            this->pop_back();
-            return this->end();
-        }
-
         iterator it = this->begin();
         while (it != this->end())
         {
             if(it == position)
             {
-                it->pre->next = it->next;
-                it->next->pre = it->pre;
+                if(it->pre != nullptr) it->pre->next = it->next;
+                if(it->next != nullptr) it->next->pre = it->pre;
                 safeRelease(it.data());
                 this->m_count--;
                 break;
