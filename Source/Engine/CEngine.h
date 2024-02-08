@@ -8,12 +8,13 @@ class CEngine
 private:
     static CEngine* s_instance;
     CEngine();
+    ~CEngine();
+
     CObjWrapper<bool> m_running;
 
 public:
     CEngine(CEngine &other) = delete;
     void operator=(const CEngine &) = delete;
-    ~CEngine();
     static CEngine* instance();
 
     bool initialize();

@@ -6,6 +6,7 @@
 #include <Utils.h>
 #include <CIterator.h>
 #include <SNode.h>
+#include <CPoolSignals.h>
 
 int main(int argc, char *argv[])
 {

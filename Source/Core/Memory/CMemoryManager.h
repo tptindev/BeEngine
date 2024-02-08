@@ -11,6 +11,8 @@ class CMemoryManager
 private:
     static CMemoryManager* s_instance;
     CMemoryManager();
+    ~CMemoryManager();
+
     std::map<unsigned char, AAllocator*> m_allocators;
 public:
     enum ALLOC_KINDS: unsigned char
@@ -21,7 +23,6 @@ public:
 
     CMemoryManager(CMemoryManager &other) = delete;
     void operator=(const CMemoryManager &) = delete;
-    ~CMemoryManager();
     static CMemoryManager* instance();
 
     template<typename T, typename ...Args>
