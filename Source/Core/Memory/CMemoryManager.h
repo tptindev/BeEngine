@@ -3,7 +3,6 @@
 
 #include <map>
 #include "AAllocator.h"
-#include "CObjWrapper.h"
 
 class CMemoryManager
 {
@@ -26,12 +25,11 @@ public:
     static CMemoryManager* instance();
 
     template<typename T, typename ...Args>
-    CObjWrapper<T> alloc(ALLOC_KINDS kind, Args&&...args)
+    T* alloc(ALLOC_KINDS kind, Args&&...args)
     {
         T* ptr = static_cast<T*>(m_allocators[kind]->allocate(sizeof(T)));
         *ptr = T(std::forward<Args>(args)...);
-
-        return CObjWrapper<T>(ptr);
+        return ptr;
     }
 
     template<typename T>

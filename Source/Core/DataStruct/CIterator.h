@@ -2,6 +2,7 @@
 #define CITERATOR_H
 
 #include "SNode.h"
+#include <iostream>
 
 template<typename T>
 class CIterator
@@ -42,6 +43,7 @@ public:
     // Overload == operator to check for inequality
     bool operator==(const CIterator& other) const
     {
+        std::cout << m_data << ", " << other.m_data << std::endl;
         return m_data == other.m_data;
     }
     SNode<T> *data() const

@@ -4,7 +4,7 @@
 
 CEngine* CEngine::s_instance = nullptr;
 CEngine::CEngine()
-    :m_running(StackAlloc(bool,false))
+    :m_running(false)
 {
     _DEBUG("%s", __FUNCTION__);
 }

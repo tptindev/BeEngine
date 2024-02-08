@@ -1,6 +1,7 @@
 #ifndef CDOUBLYLINKEDLIST_H
 #define CDOUBLYLINKEDLIST_H
 
+#include <Utils.h>
 #include "ILinkedList.h"
 #include "CIterator.h"
 #include "SNode.h"
@@ -106,36 +107,46 @@ public:
 
     void pop_front()
     {
-        if (this->m_head == nullptr)
+        if (this->empty())
         {
             std::cerr << "List is empty. Cannot pop_front.\n";
             return;
         }
 
-        SNode<T> *front = this->m_head;
+        if (this->m_head->next == nullptr)
+        {
+            delete this->m_head;
+            this->m_head = nullptr;
+        }
+        else
+        {
+            this->m_head = this->m_head->next;
+            delete this->m_head->pre;;
+            this->m_head->pre = nullptr;
+        }
 
-        this->m_head = front->next;
-        safeRelease(this->m_head->pre);
         this->m_count--;
     }
 
     void pop_back()
     {
-        if (this->m_head == nullptr)
+        if (this->empty())
         {
             std::cerr << "List is empty. Cannot pop_back.\n";
             return;
         }
 
-        if (this->m_head->next == nullptr)
+        if (this->m_head->pre == nullptr && this->m_head->next == nullptr)
         {
             this->m_count = 1;
-            safeRelease(this->m_head);
+            delete this->m_head;
+            this->m_head = nullptr;
         }
         else
         {
             this->m_tail = this->m_tail->pre;
-            safeRelease(this->m_tail->next);
+            delete this->m_tail->next;
+            this->m_tail->next = nullptr;
         }
 
         this->m_count--;
@@ -143,32 +154,26 @@ public:
 
     CIterator<T> erase(CIterator<T> position)
     {
+        if(position == this->begin())
+        {
+            this->pop_front();
+            return this->begin();
+        }
+        else if(position == this->end())
+        {
+            this->pop_back();
+            return this->end();
+        }
+
         iterator it = this->begin();
         while (it != this->end())
         {
             if(it == position)
             {
-                if(it == this->begin())
-                {
-                    this->m_head = this->m_head->next;
-                    this->m_head->pre = nullptr;
-                }
-                else
-                {
-                    if(it == this->end())
-                    {
-                        this->pop_back();
-                    }
-                    else
-                    {
-                        it->pre->next = it->next;
-                        it->next->pre = it->pre;
-                        safeRelease(it.data());
-                    }
-                }
-
+                it->pre->next = it->next;
+                it->next->pre = it->pre;
+                safeRelease(it.data());
                 this->m_count--;
-
                 break;
             }
             ++it;
