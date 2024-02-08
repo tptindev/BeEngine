@@ -68,7 +68,19 @@ public:
     {
         return m_count;
     }
+
+    SNode<T> *head() const
+    {
+        return m_head;
+    }
+
+    SNode<T> *tail() const
+    {
+        return m_tail;
+    }
 };
+
+
 
 
 #endif // ILINKEDLIST_H

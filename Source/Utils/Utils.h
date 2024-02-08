@@ -12,8 +12,7 @@
 template <class T>
 inline void safeRelease(T *ptr)
 {
-    if (ptr == nullptr)
-        return;
+    if (ptr == nullptr) return;
     delete ptr;
     ptr = nullptr;
 }

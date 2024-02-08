@@ -2,6 +2,8 @@
 #define CDOUBLYLINKEDLIST_H
 
 #include "ILinkedList.h"
+#include "CIterator.h"
+#include "SNode.h"
 
 template<typename T>
 class CDoublyLinkedList: public ILinkedList<T>
@@ -14,17 +16,19 @@ public:
         this->m_tail = nullptr;
     }
 
+    typedef CIterator<T>  iterator;
+
     template<class ...TArgs>
     void emplace_front(TArgs&& ...args)
     {
-        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
+        SNode<T>* el = new SNode<T>(T(std::forward<TArgs>(args)...));
         if(this->empty())
         {
             this->m_head = el;
         }
         else
         {
-            this->m_head->previous = el;
+            this->m_head->pre = el;
             el->next = this->m_head;
             this->m_head = el;
         }
@@ -34,7 +38,7 @@ public:
     template<class ...TArgs>
     void emplace_back(TArgs&& ...args)
     {
-        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
+        SNode<T>* el = new SNode<T>(T(std::forward<TArgs>(args)...));
         if(this->empty())
         {
             this->m_head = el;
@@ -44,12 +48,12 @@ public:
             if(this->m_tail == nullptr)
             {
                 this->m_tail = el;
-                this->m_tail->previous = this->m_head;
+                this->m_tail->pre = this->m_head;
                 this->m_head->next = this->m_tail;
             }
             else
             {
-                el->previous = this->m_tail;
+                el->pre = this->m_tail;
                 this->m_tail->next = el;
                 this->m_tail = el;
             }
@@ -67,7 +71,7 @@ public:
         }
         else
         {
-            this->m_head->previous = el;
+            this->m_head->pre = el;
             el->next = this->m_head;
             this->m_head = el;
         }
@@ -86,12 +90,12 @@ public:
             if (this->m_tail == nullptr)
             {
                 this->m_tail = el;
-                this->m_tail->previous = this->m_head;
+                this->m_tail->pre = this->m_head;
                 this->m_head->next = this->m_tail;
             }
             else
             {
-                el->previous = this->m_tail;
+                el->pre = this->m_tail;
                 this->m_tail->next = el;
                 this->m_tail = el;
             }
@@ -111,9 +115,7 @@ public:
         SNode<T> *front = this->m_head;
 
         this->m_head = front->next;
-        this->m_head->previous = nullptr;
-
-        safeRelease(front);
+        safeRelease(this->m_head->pre);
         this->m_count--;
     }
 
@@ -127,43 +129,71 @@ public:
 
         if (this->m_head->next == nullptr)
         {
-            this->m_count = 0;
+            this->m_count = 1;
             safeRelease(this->m_head);
-            return;
+        }
+        else
+        {
+            this->m_tail = this->m_tail->pre;
+            safeRelease(this->m_tail->next);
         }
 
-        SNode<T> *tail = this->m_tail;
-        this->m_tail = this->m_tail->previous;
-        this->m_tail->next = nullptr;
-        safeRelease(tail);
         this->m_count--;
     }
 
     CIterator<T> erase(CIterator<T> position)
     {
-        CIterator<T> it = this->begin();
+        iterator it = this->begin();
         while (it != this->end())
         {
             if(it == position)
             {
-                return it;
+                if(it == this->begin())
+                {
+                    this->m_head = this->m_head->next;
+                    this->m_head->pre = nullptr;
+                }
+                else
+                {
+                    if(it == this->end())
+                    {
+                        this->pop_back();
+                    }
+                    else
+                    {
+                        it->pre->next = it->next;
+                        it->next->pre = it->pre;
+                        safeRelease(it.data());
+                    }
+                }
+
+                this->m_count--;
+
+                break;
             }
             ++it;
         }
-        return this->end();
+        return ++it;
     }
 
     CIterator<T> erase(CIterator<T> first, CIterator<T> last)
     {
-        while (first != last)
+        iterator &it = first;
+        while (it != last)
         {
-            if(first == last)
+            if(it == last)
             {
-                return first;
+                // pre
+                it->pre->next = it->next;
+                // next
+                it->next->pre = it->pre;
+
+                this->m_count--;
+                break;
             }
-            ++first;
+            ++it;
         }
-        return this->end();
+        return ++it;
     }
 };
 
