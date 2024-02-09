@@ -6,7 +6,6 @@
 #include <Utils.h>
 #include <CIterator.h>
 #include <SNode.h>
-#include <CPoolSignals.h>
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +29,7 @@ int main(int argc, char *argv[])
     CDoublyLinkedList<int>::iterator it = list.begin();
     while (it != list.end())
     {
-        if((*it) == 99)
+        if((*it) == 8)
         {
             list.erase(it);
             break;

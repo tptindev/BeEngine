@@ -57,40 +57,12 @@ public:
 
     void push_front(T data)
     {
-        SNode<T>* el = new SNode<T>(data);
-        if(this->empty())
-        {
-            this->m_head = el;
-        }
-        else
-        {
-            el->next = this->m_head;
-            this->m_head = el;
-        }
+        emplace_front(data);
     }
 
     void push_back(T data)
     {
-        SNode<T>* el = new SNode<T>(data);
-        if(this->empty())
-        {
-            this->m_head = el;
-        }
-        else
-        {
-            if(this->m_tail == nullptr)
-            {
-                this->m_tail = el;
-                this->m_head->next = this->m_tail;
-            }
-            else
-            {
-                this->m_tail->next = el;
-                this->m_tail = el;
-            }
-        }
-
-        this->m_count++;
+        emplace_back(data);
     }
 
     void pop_front()

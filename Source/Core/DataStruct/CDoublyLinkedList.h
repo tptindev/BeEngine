@@ -1,5 +1,5 @@
-#ifndef CDOUBLYLINKEDLIST_H
-#define CDOUBLYLINKEDLIST_H
+#ifndef C_DOUBLYLINKEDLIST_H
+#define C_DOUBLYLINKEDLIST_H
 
 #include <Utils.h>
 #include "ILinkedList.h"
@@ -119,7 +119,6 @@ public:
             {
                 if(it->pre != nullptr) it->pre->next = it->next;
                 if(it->next != nullptr) it->next->pre = it->pre;
-                safeRelease(it.data());
                 this->m_count--;
                 break;
             }
@@ -133,20 +132,16 @@ public:
         iterator &it = first;
         while (it != last)
         {
-            if(it == last)
-            {
-                // pre
-                it->pre->next = it->next;
-                // next
-                it->next->pre = it->pre;
-
-                this->m_count--;
-                break;
-            }
+            // pre
+            it->pre->next = it->next;
+            // next
+            it->next->pre = it->pre;
+            safeRelease(it.data());
             ++it;
+            this->m_count--;
         }
         return ++it;
     }
 };
 
-#endif // CDOUBLYLINKEDLIST_H
+#endif // C_DOUBLYLINKEDLIST_H
