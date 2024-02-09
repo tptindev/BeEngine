@@ -113,12 +113,25 @@ public:
     CIterator<T> erase(CIterator<T> position)
     {
         iterator it = this->begin();
+        if(position == it)
+        {
+            pop_front();
+            return this->begin();
+        }
+
+        else if(position == CIterator<T>(this->m_tail))
+        {
+            pop_back();
+            return this->end();
+        }
+
+
         while (it != this->end())
         {
             if(it == position)
             {
-                if(it->pre != nullptr) it->pre->next = it->next;
-                if(it->next != nullptr) it->next->pre = it->pre;
+                it->pre->next = it->next;
+                it->next->pre = it->pre;
                 this->m_count--;
                 break;
             }

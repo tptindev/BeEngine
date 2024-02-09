@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     CDoublyLinkedList<int>::iterator it = list.begin();
     while (it != list.end())
     {
-        if((*it) == 8)
+        if((*it) == 13)
         {
             list.erase(it);
             break;
