@@ -3,10 +3,11 @@
 #include <CMemoryManager.h>
 
 CEngine* CEngine::s_instance = nullptr;
-CEngine::CEngine()
-    :m_running(false)
+CEngine::CEngine(CObject *parent)
+    :CObject(parent), m_running(false)
 {
     _DEBUG("%s", __FUNCTION__);
+
 }
 
 CEngine::~CEngine()
@@ -36,6 +37,11 @@ void CEngine::clean()
 }
 
 void CEngine::quit()
+{
+
+}
+
+void CEngine::onNotify(uint8_t id, void *data)
 {
 
 }

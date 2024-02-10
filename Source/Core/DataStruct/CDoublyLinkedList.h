@@ -17,6 +17,15 @@ public:
         this->m_tail = nullptr;
     }
 
+    CDoublyLinkedList(const T& value)
+    {
+        this->m_count = 0;
+        this->m_head = nullptr;
+        this->m_tail = nullptr;
+        push_back(value);
+    }
+
+
     typedef CIterator<T>  iterator;
 
     template<class ...TArgs>

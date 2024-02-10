@@ -5,8 +5,10 @@
 
 class IObserver
 {
+private:
+    friend class CSignalPool;
 protected:
-    virtual void onNotify(uint8_t id, void* data) = 0; // notify
+    virtual void onNotify(uint8_t id, void* data) {}; // notify
 };
 
 #endif // IOBSERVER_H

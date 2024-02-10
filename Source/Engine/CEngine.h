@@ -1,11 +1,13 @@
 #ifndef __CENGINE_H__
 #define __CENGINE_H__
 
-class CEngine
+#include "CObject.h"
+
+class CEngine: public CObject
 {
 private:
     static CEngine* s_instance;
-    CEngine();
+    explicit CEngine(CObject* parent = nullptr);
     ~CEngine();
 
     bool m_running;
@@ -19,6 +21,10 @@ public:
     void loop();
     void clean();
     void quit();
+
+    // IObserver interface
+protected:
+    virtual void onNotify(uint8_t id, void *data) override;
 };
 
 #endif // __CENGINE_H__
