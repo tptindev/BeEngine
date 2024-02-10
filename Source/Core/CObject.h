@@ -9,13 +9,15 @@
 class CObject: public IObserver
 {
 private:
+    static CPoolAllocator s_allocator;
     CDoublyLinkedList<CObject*> m_childs;
     CSignalPool* m_signal_pool;
 
 public:
-    static CPoolAllocator s_allocator;
+    static void *operator new[](size_t size);
     static void *operator new(size_t size);
     static void operator delete(void *ptr, size_t size);
+
 
 public:
     explicit CObject(CObject* parent = nullptr);

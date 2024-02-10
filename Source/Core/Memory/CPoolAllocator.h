@@ -12,11 +12,11 @@ private:
     void* m_data; // Pointer to the allocated memory
 
 public:
-    CPoolAllocator(size_t);
+    explicit CPoolAllocator(size_t);
 
     // IAllocator interface
 public:
-    virtual void *allocate(size_t chunks = 1) override;
+    virtual void *allocate(size_t) override;
     virtual void deallocate(void *, size_t) override;
 };
 

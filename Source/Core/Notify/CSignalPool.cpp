@@ -13,7 +13,7 @@ CSignalPool::~CSignalPool()
 
 CSignalPool *CSignalPool::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CSignalPool: s_instance;
+    return s_instance = (s_instance == nullptr)? new CSignalPool(): s_instance;
 }
 
 bool CSignalPool::connect(uint8_t signal, IObserver *observer)

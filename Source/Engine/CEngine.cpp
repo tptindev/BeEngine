@@ -17,7 +17,7 @@ CEngine::~CEngine()
 
 CEngine *CEngine::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CEngine(): s_instance;
+    return s_instance = (s_instance == nullptr)? new CEngine(nullptr): s_instance;
 }
 
 bool CEngine::initialize()
