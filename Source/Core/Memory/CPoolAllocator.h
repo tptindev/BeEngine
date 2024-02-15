@@ -6,6 +6,7 @@
 
 class CPoolAllocator: public AAllocator
 {
+    typedef CDoublyLinkedList<void*>::iterator Chunk;
 private:
     CDoublyLinkedList<void*>    m_pool;
     size_t m_chunks_per_block;

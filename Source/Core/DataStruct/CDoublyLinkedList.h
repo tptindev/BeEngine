@@ -27,6 +27,8 @@ public:
 
 
     typedef CIterator<T>  iterator;
+    typedef const CIterator<T> const_iterator;
+
 
     template<class ...TArgs>
     void emplace_front(TArgs&& ...args)
@@ -119,7 +121,7 @@ public:
         this->m_count--;
     }
 
-    CIterator<T> erase(CIterator<T> position)
+    iterator erase(iterator position)
     {
         iterator it = this->begin();
         if(position == it)
@@ -128,7 +130,7 @@ public:
             return this->begin();
         }
 
-        else if(position == CIterator<T>(this->m_tail))
+        else if(position == iterator(this->m_tail))
         {
             pop_back();
             return this->end();
@@ -149,17 +151,12 @@ public:
         return ++it;
     }
 
-    CIterator<T> erase(CIterator<T> first, CIterator<T> last)
+    iterator erase(iterator first, iterator last)
     {
         iterator &it = first;
         while (it != last)
         {
-            // pre
-            it->pre->next = it->next;
-            // next
-            it->next->pre = it->pre;
-            safeRelease(it.data());
-            ++it;
+            erase(it);
             this->m_count--;
         }
         return ++it;

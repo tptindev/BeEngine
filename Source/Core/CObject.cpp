@@ -9,20 +9,21 @@ CObject::CObject(CObject *parent)
         parent->m_childs.push_back(this);
     }
 
-    m_signal_pool =  CSignalPool::instance();
+    m_signal_pool = CSignalPool::instance();
 }
 
-void *CObject::operator new[](size_t size)
-{
-    return s_allocator.allocate(size);
-}
 
-void *CObject::operator new(size_t size)
-{
-    return s_allocator.allocate(size);
-}
+//void *CObject::operator new[](size_t size)
+//{
+//    return s_allocator.allocate(size);
+//}
 
-void CObject::operator delete(void *ptr, size_t size)
-{
-    s_allocator.deallocate(ptr, size);
-}
+//void *CObject::operator new(size_t size)
+//{
+//    return s_allocator.allocate(size);
+//}
+
+//void CObject::operator delete(void *ptr, size_t size)
+//{
+//    s_allocator.deallocate(ptr, size);
+//}

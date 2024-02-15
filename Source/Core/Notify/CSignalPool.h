@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <unordered_map>
+#include <functional>
 #include <IObserver.h>
 #include "CDoublyLinkedList.h"
 
@@ -13,7 +14,7 @@ private:
     CSignalPool();
     ~CSignalPool();
 
-    std::unordered_map<uint8_t, CDoublyLinkedList<IObserver*>> m_observers;
+    std::unordered_map<const char*, std::function<void(void)>> m_signals;
 
 public:
     CSignalPool(CSignalPool &&) = delete;
@@ -22,8 +23,19 @@ public:
     void operator=(const CSignalPool &) = delete;
     static CSignalPool *instance();
 
-    bool connect(uint8_t signal, IObserver* observer);
-    bool notify(uint8_t signal, void* data); // signal
+    template<typename Ret, typename ...Args>
+    bool signal_wrapper(uint8_t, Args&&... args)
+    {
+        auto func = [](Args&&... args) -> Ret {
+
+        };
+
+
+
+    }
+
+//    bool connect(uint8_t signal, IObserver* observer);
+    //    bool notify(uint8_t signal, void* data); // signal
 };
 
 #endif // CSIGNALPOOL_H
