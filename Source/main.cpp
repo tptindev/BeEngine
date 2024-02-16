@@ -1,11 +1,7 @@
 
 #include <LoggerDefines.h>
 #include <CEngine.h>
-#include <CSinglyLinkedList.h>
-#include <CDoublyLinkedList.h>
 #include <Utils.h>
-#include <CIterator.h>
-#include <SNode.h>
 
 int main(int argc, char *argv[])
 {

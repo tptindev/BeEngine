@@ -11,7 +11,6 @@ struct SNode
     SNode* pre;
     SNode* next;
 
-
     SNode(const T& data)
     {
         this->data = std::move(data);

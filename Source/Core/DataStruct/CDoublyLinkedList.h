@@ -33,7 +33,7 @@ public:
     template<class ...TArgs>
     void emplace_front(TArgs&& ...args)
     {
-        SNode<T>* el = new SNode<T>(T(std::forward<TArgs>(args)...));
+        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
         if(this->m_head == nullptr)
         {
             this->m_head = this->m_tail = el;
@@ -50,7 +50,7 @@ public:
     template<class ...TArgs>
     void emplace_back(TArgs&& ...args)
     {
-        SNode<T>* el = new SNode<T>(T(std::forward<TArgs>(args)...));
+        SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
         if(this->m_head == nullptr)
         {
             this->m_head = this->m_tail = el;

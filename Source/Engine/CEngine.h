@@ -21,10 +21,6 @@ public:
     void loop();
     void clean();
     void quit();
-
-    // IObserver interface
-protected:
-    virtual void onNotify(uint8_t id, void *data) override;
 };
 
 #endif // __CENGINE_H__

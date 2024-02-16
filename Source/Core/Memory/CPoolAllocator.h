@@ -8,7 +8,7 @@ class CPoolAllocator: public AAllocator
 {
     typedef CDoublyLinkedList<void*>::iterator Chunk;
 private:
-    CDoublyLinkedList<void*>    m_pool;
+    CDoublyLinkedList<void*>    m_blocks;
     size_t m_chunks_per_block;
     void* m_data; // Pointer to the allocated memory
 

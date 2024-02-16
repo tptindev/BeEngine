@@ -14,6 +14,9 @@ public:
         this->m_tail = nullptr;
     }
 
+    typedef CIterator<T>  iterator;
+    typedef const CIterator<T> const_iterator;
+
     template<class ...TArgs>
     void emplace_front(TArgs&& ...args)
     {
@@ -111,10 +114,10 @@ public:
     }
 
     template<class ...TArgs>
-    void emplace(const CIterator<T> position, TArgs&&...args)
+    void emplace(const_iterator position, TArgs&&...args)
     {
         SNode<T>* el = new SNode<T>(std::forward<TArgs>(args)...);
-        CIterator<T> it = this->begin();
+        iterator it = this->begin();
         while (it != this->end())
         {
             if(it == position)

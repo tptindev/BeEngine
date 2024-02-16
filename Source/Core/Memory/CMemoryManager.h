@@ -40,5 +40,6 @@ public:
 };
 
 #define StackAlloc(T,...) CMemoryManager::instance()->alloc<T>(CMemoryManager::ALLOC_KINDS::STACK,##__VA_ARGS__)
+#define PoolAlloc(T,...) CMemoryManager::instance()->alloc<T>(CMemoryManager::ALLOC_KINDS::POOL,##__VA_ARGS__)
 
 #endif // CMEMORYMANAGER_H

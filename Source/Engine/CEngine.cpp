@@ -17,7 +17,7 @@ CEngine::~CEngine()
 
 CEngine *CEngine::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CEngine(nullptr): s_instance;
+    return s_instance = (s_instance == nullptr)? new CEngine(): s_instance;
 }
 
 bool CEngine::initialize()
@@ -37,11 +37,6 @@ void CEngine::clean()
 }
 
 void CEngine::quit()
-{
-
-}
-
-void CEngine::onNotify(uint8_t id, void *data)
 {
 
 }
