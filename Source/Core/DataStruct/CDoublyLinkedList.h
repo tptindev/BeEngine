@@ -29,6 +29,17 @@ public:
     typedef CIterator<T>  iterator;
     typedef const CIterator<T> const_iterator;
 
+    T& operator[](unsigned int index)
+    {
+        if (index < 0 || index >= this->m_count) {
+            throw std::out_of_range("Index out of range");
+        }
+        SNode<T>* current = this->head();
+        for (int i = 0; i < index; ++i) {
+            current = current->next;
+        }
+        return current->data;
+    }
 
     template<class ...TArgs>
     void emplace_front(TArgs&& ...args)

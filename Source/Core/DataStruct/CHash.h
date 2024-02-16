@@ -10,7 +10,7 @@ class CHash
 {
 private:
     size_t m_max_capacity = sizeof(Key);
-    CDoublyLinkedList<Value> m_table;
+    CDoublyLinkedList<Value*> m_table;
 
 private:
     unsigned int hash(const char* key)
@@ -27,7 +27,7 @@ private:
 
     unsigned int hash(int key)
     {
-        return (key % m_max_capacity);
+        return (key % static_cast<int>(m_max_capacity));
     }
 
 public:
@@ -47,6 +47,16 @@ public:
     unsigned int operator()(int key)
     {
         return hash(key);
+    }
+
+    void insert(Key key, Value* ptr)
+    {
+        if(ptr == nullptr) return;
+        else
+        {
+            int index = hash(key);
+            m_table[index] = ptr;
+        }
     }
 };
 
