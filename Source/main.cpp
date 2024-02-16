@@ -2,6 +2,7 @@
 #include <LoggerDefines.h>
 #include <CEngine.h>
 #include <Utils.h>
+#include <CHash.h>
 
 int main(int argc, char *argv[])
 {

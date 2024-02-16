@@ -4,7 +4,7 @@
 
 CEngine* CEngine::s_instance = nullptr;
 CEngine::CEngine(CObject *parent)
-    :CObject(parent), m_running(false)
+    :CObject(parent), m_running(true)
 {
     _DEBUG("%s", __FUNCTION__);
 
@@ -22,7 +22,6 @@ CEngine *CEngine::instance()
 
 bool CEngine::initialize()
 {
-    m_running = true;
     return true;
 }
 
