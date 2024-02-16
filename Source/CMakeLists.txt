@@ -4,6 +4,9 @@ add_executable(${PROJECT_NAME} main.cpp)
 add_subdirectory(Core)
 target_link_libraries(${PROJECT_NAME} PRIVATE core_module)
 
+add_subdirectory(ECS)
+target_link_libraries(${PROJECT_NAME} PRIVATE ecs_module)
+
 add_subdirectory(Utils)
 target_link_libraries(${PROJECT_NAME} PRIVATE utils_module)
 
@@ -32,4 +35,5 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Input
     ${CMAKE_CURRENT_SOURCE_DIR}/Net
     ${CMAKE_CURRENT_SOURCE_DIR}/Audio
+    ${CMAKE_CURRENT_SOURCE_DIR}/ECS
 )
