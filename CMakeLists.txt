@@ -13,32 +13,35 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(LIBRARY_DIR
     "${CMAKE_SOURCE_DIR}/3rd/libs/GLFW"
     "${CMAKE_SOURCE_DIR}/3rd/libs/SDL2"
-    "${CMAKE_SOURCE_DIR}/3rd/libs/SDL2_Image"
     "${CMAKE_SOURCE_DIR}/3rd/libs/TinyXML2")
 
 set(INCLUDE_DIR
     "${CMAKE_SOURCE_DIR}/3rd/include/GLFW"
     "${CMAKE_SOURCE_DIR}/3rd/include/SDL2"
-    "${CMAKE_SOURCE_DIR}/3rd/include/SDL2_Image"
     "${CMAKE_SOURCE_DIR}/3rd/include/TinyXML2")
 
-set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2_image -lopengl32 -lglfw3 -lgdi32")
+set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lopengl32 -lglfw3 -lgdi32")
 
 message("Root source directory: ${CMAKE_SOURCE_DIR}")
 message("Output directory: ${CMAKE_BINARY_DIR}")
 
-# Get a list of all subdirectories in the 3rd/bin directory
-file(GLOB subdirectories LIST_DIRECTORIES true ${CMAKE_SOURCE_DIR}/3rd/bin/*)
+file(COPY
+    "${CMAKE_SOURCE_DIR}/3rd/bin/SDL2/SDL2.dll"
+    "${CMAKE_SOURCE_DIR}/3rd/bin/SDL2/SDL2_image.dll"
+    DESTINATION ${CMAKE_BINARY_DIR})
 
-# Iterate through the list of subdirectories
-foreach(subdirectory ${subdirectories})
-    if(IS_DIRECTORY ${subdirectory})
-        # copy game bin into build/3rd/bin directory
-        file(COPY
-            "${subdirectory}"
-            DESTINATION ${CMAKE_BINARY_DIR}/bin)
-    endif()
-endforeach()
+## Get a list of all subdirectories in the 3rd/bin directory
+#file(GLOB subdirectories LIST_DIRECTORIES true ${CMAKE_SOURCE_DIR}/3rd/bin/*)
+
+## Iterate through the list of subdirectories
+#foreach(subdirectory ${subdirectories})
+#    if(IS_DIRECTORY ${subdirectory})
+#        # copy game bin into build/3rd/bin directory
+#        file(COPY
+#            "${subdirectory}"
+#            DESTINATION ${CMAKE_BINARY_DIR})
+#    endif()
+#endforeach()
 
 include_directories(${INCLUDE_DIR})
 link_directories(${LIBRARY_DIR})
