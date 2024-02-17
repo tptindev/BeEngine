@@ -2,6 +2,7 @@
 #include <LoggerDefines.h>
 #include <CMemoryManager.h>
 #include <SDL_timer.h>
+#include <CRenderer2D.h>
 
 CEngine* CEngine::s_instance = nullptr;
 bool CEngine::s_running = false;
@@ -22,8 +23,18 @@ CEngine *CEngine::instance()
     return s_instance = (s_instance == nullptr)? new CEngine(): s_instance;
 }
 
-bool CEngine::initialize()
+bool CEngine::initialize(const char* title, float width, float height)
 {
+    if (!CRenderer2D::instance()->ready())
+        return false;
+
+    // [1] init SDL and create the Game Window and Renderer
+    if (!CRenderer2D::instance()->openWindow(title, width, height))
+    {
+        return false;
+    }
+
+    // [2] start game engine
     s_running = true;
     return true;
 }

@@ -21,7 +21,7 @@ public:
     void operator=(const CEngine &) = delete;
     static CEngine *instance();
 
-    bool initialize();
+    bool initialize(const char* title, float width, float height);
     void loop();
     void clean();
     void quit();

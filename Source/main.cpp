@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    bool initialized = CEngine::instance()->initialize();
+    bool initialized = CEngine::instance()->initialize("xin_chao", 720, 480);
     if(initialized)
     {
         CEngine::instance()->loop();
