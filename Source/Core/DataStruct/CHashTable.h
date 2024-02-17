@@ -23,6 +23,7 @@ private:
             hash_value += key[i];
             hash_value = (hash_value + key[i]) % m_max_capacity;
         }
+
         return hash_value;
     }
 
@@ -57,9 +58,12 @@ public:
         return out;
     }
 
-    CDoublyLinkedList<T*>& operator[](const char* key) const
+    CDoublyLinkedList<T*>& operator[](const char* key)
     {
         unsigned int index = hash(key);
+        if (index < 0 || index >= m_max_capacity) {
+            throw std::out_of_range("Index out of range");
+        }
         return m_table[index];
     }
 
