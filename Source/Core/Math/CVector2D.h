@@ -39,25 +39,54 @@ public:
         return *this;
     }
 
-    // Vector addition
+    // Start Vector addition
     CVector2D<T> operator+(const CVector2D<T>& other) const {
         return CVector2D<T>(x + other.x, y + other.y);
     }
 
-    // Vector subtraction
+    CVector2D<T>& operator+=(const CVector2D<T>& other) const {
+        x += other.x;
+        y += other.y;
+        return *this;
+    }
+    // End Vector addition
+
+    // Start Vector subtraction
     CVector2D<T> operator-(const CVector2D<T>& other) const {
         return CVector2D<T>(x - other.x, y - other.y);
     }
 
-    // Scalar multiplication
+    CVector2D<T>& operator-=(const CVector2D<T>& other) const {
+        x -= other.x;
+        y -= other.y;
+        return *this;
+    }
+    // End Vector subtraction
+
+    // Start Scalar multiplication
     CVector2D<T> operator*(float scalar) const {
         return CVector2D<T>(x * scalar, y * scalar);
     }
 
-    // Scalar division
+    CVector2D<T>& operator*=(const CVector2D<T>& other) const {
+        x *= other.x;
+        y *= other.y;
+        return *this;
+    }
+    // End Scalar multiplication
+
+    // Start Scalar division
     CVector2D<T> operator/(float scalar) const {
         return Vector2D(x / scalar, y / scalar);
     }
+
+    CVector2D<T>& operator/=(const CVector2D<T>& other) const {
+        x /= other.x;
+        y /= other.y;
+        return *this;
+    }
+    // End Scalar division
+
 
     // Dot product
     T dot(const CVector2D<T>& other) const
