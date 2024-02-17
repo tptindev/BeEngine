@@ -1,8 +1,9 @@
 #include "CEngine.h"
 #include <LoggerDefines.h>
 #include <CMemoryManager.h>
-#include <SDL_timer.h>
 #include <CRenderer2D.h>
+#include <SDL_timer.h>
+#include <SDL_events.h>
 
 CEngine* CEngine::s_instance = nullptr;
 bool CEngine::s_running = false;
@@ -16,6 +17,39 @@ CEngine::CEngine(CObject *parent)
 CEngine::~CEngine()
 {
     _DEBUG("%s", __FUNCTION__);
+}
+
+void CEngine::handle_events()
+{
+    SDL_Event event;
+    while (SDL_PollEvent(&event))
+    {
+        switch (event.type) {
+        case SDL_QUIT:
+            s_running = false;
+            break;
+        case SDL_KEYDOWN:
+        {
+            if(event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                s_running = false;
+                break;
+            }
+        }
+        default:
+            break;
+        }
+    }
+}
+
+void CEngine::update(float dt)
+{
+
+}
+
+void CEngine::render()
+{
+
 }
 
 CEngine *CEngine::instance()
@@ -42,7 +76,8 @@ bool CEngine::initialize(const char* title, float width, float height)
 void CEngine::loop()
 {
     const int fps = 60;
-    const int frameDelay = 1000 / fps; // 16 milliseconds
+    const int _1s = 1000;
+    const int frameDelay = _1s / fps; // 16 milliseconds
 
     // time between 2 frames
     float deltaTime = 0.0f;
@@ -63,9 +98,9 @@ void CEngine::loop()
 
         // [game logic]
         {
-//            handle_events();
-//            update(deltaTime);
-//            render();
+            handle_events();
+            update(deltaTime);
+            render();
         }
         // [game logic]
 

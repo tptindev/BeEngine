@@ -8,4 +8,4 @@ target_include_directories(graphics_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-target_link_libraries(graphics_module PRIVATE core_module utils_module SDL2 SDL2_image)
+target_link_libraries(graphics_module PRIVATE core_module utils_module SDL2 SDL2_image opengl32 glfw3 gdi32)

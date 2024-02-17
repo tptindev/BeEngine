@@ -4,9 +4,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <iostream>
+#include <functional>
 #include "CDoublyLinkedList.h"
 
-template<typename Key, typename T>
+template<typename Key, typename T, size_t TableSize>
 class CHashTable
 {
 private:
@@ -27,14 +28,14 @@ private:
         return hash_value;
     }
 
-    unsigned int hash(int key)
+    unsigned int hash(Key key)
     {
         return (key % static_cast<int>(m_max_capacity));
     }
 
 public:
-    CHashTable(size_t capacity)
-        : m_max_capacity(capacity)
+    CHashTable()
+        : m_max_capacity(TableSize)
     {
         m_table = new CDoublyLinkedList<T*>[m_max_capacity];
     }

@@ -14,6 +14,11 @@ private:
 
     CTimer m_timer;
 
+private:
+    void handle_events();
+    void update(float dt);
+    void render();
+
 public:
     CEngine(CEngine &&) = delete;
     CEngine &operator=(CEngine &&) = delete;
