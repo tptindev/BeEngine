@@ -7,3 +7,5 @@ add_library(graphics_module ${SOURCE_FILES})
 target_include_directories(graphics_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+target_link_libraries(graphics_module PRIVATE core_module utils_module)

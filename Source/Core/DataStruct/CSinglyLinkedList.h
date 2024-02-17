@@ -1,10 +1,10 @@
 #ifndef CSINGLYLINKEDLIST_H
 #define CSINGLYLINKEDLIST_H
 
-#include "ILinkedList.h"
+#include "ALinkedList.h"
 
 template<typename T>
-class CSinglyLinkedList: public ILinkedList<T>
+class CSinglyLinkedList: public ALinkedList<T>
 {
 public:
     CSinglyLinkedList()

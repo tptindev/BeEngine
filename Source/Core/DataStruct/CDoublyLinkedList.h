@@ -2,12 +2,12 @@
 #define C_DOUBLYLINKEDLIST_H
 
 #include <Utils.h>
-#include "ILinkedList.h"
+#include "ALinkedList.h"
 #include "CIterator.h"
 #include "SNode.h"
 
 template<typename T>
-class CDoublyLinkedList: public ILinkedList<T>
+class CDoublyLinkedList: public ALinkedList<T>
 {
 public:
     CDoublyLinkedList()

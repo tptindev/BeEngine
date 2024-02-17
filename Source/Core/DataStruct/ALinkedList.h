@@ -1,5 +1,5 @@
-#ifndef ILINKEDLIST_H
-#define ILINKEDLIST_H
+#ifndef ALINKEDLIST_H
+#define ALINKEDLIST_H
 
 #include <iostream>
 #include <stdint.h>
@@ -8,7 +8,7 @@
 #include "CIterator.h"
 
 template<typename T>
-class ILinkedList
+class ALinkedList
 {
 protected:
     uint32_t  m_count;
@@ -16,9 +16,10 @@ protected:
     SNode<T>* m_tail;
 
 public:
-    friend std::ostream &operator<<(std::ostream &out, ILinkedList *list)
+    friend std::ostream &operator<<(std::ostream &out, ALinkedList *list)
     {
         out << "[" << &list << "] Linked List: " << std::endl;
+        out << "\nSTART ----------\n";
         if(list->empty())
         {
             out << "EMPTY" << std::endl;
@@ -34,6 +35,7 @@ public:
             }
         }
 
+        out << "END -----------\n";
         out << "Total: " << list->count() << std::endl;
 
         return out;
@@ -83,4 +85,4 @@ public:
 
 
 
-#endif // ILINKEDLIST_H
+#endif // ALINKEDLIST_H
