@@ -10,6 +10,7 @@ target_include_directories(core_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/DataStruct
     ${CMAKE_CURRENT_SOURCE_DIR}/Notify
     ${CMAKE_CURRENT_SOURCE_DIR}/Math
+    ${CMAKE_CURRENT_SOURCE_DIR}/Time
 )
 
 target_link_libraries(core_module PRIVATE utils_module)
