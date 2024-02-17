@@ -57,11 +57,11 @@ public:
         return out;
     }
 
-    //    unsigned int operator[](const char* key)
-    //    {
-    //        unsigned int index = hash(key);
-    //        return m_table[index];
-    //    }
+    CDoublyLinkedList<T*>& operator[](const char* key) const
+    {
+        unsigned int index = hash(key);
+        return m_table[index];
+    }
 
     void insert(Key key, T* ptr)
     {

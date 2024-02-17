@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 
     std::cout << hashTable << std::endl;
 
-    hashTable.remove("Khog");
+    hashTable.remove("Tinne");
     std::cout << hashTable << std::endl;
 
 
