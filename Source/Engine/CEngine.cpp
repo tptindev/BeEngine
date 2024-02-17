@@ -42,7 +42,7 @@ bool CEngine::initialize(const char* title, float width, float height)
 void CEngine::loop()
 {
     const int fps = 60;
-    const int frameDelay = 1000 / fps;
+    const int frameDelay = 1000 / fps; // 16 milliseconds
 
     // time between 2 frames
     float deltaTime = 0.0f;
@@ -69,7 +69,7 @@ void CEngine::loop()
         }
         // [game logic]
 
-        if (deltaTime < frameDelay)
+        if (deltaTime < frameDelay) //
         {
             SDL_Delay(frameDelay - deltaTime);
         }
