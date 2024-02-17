@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
 
     std::cout << hashTable << std::endl;
 
-//    hashTable.remove("Tinne");
-//    std::cout << hashTable << std::endl;
+    hashTable.remove("Khog");
+    std::cout << hashTable << std::endl;
 
 
     bool initialized = CEngine::instance()->initialize();

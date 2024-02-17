@@ -57,15 +57,11 @@ public:
         return out;
     }
 
-    unsigned int operator()(const char* key)
-    {
-        return hash(key);
-    }
-
-    unsigned int operator()(int key)
-    {
-        return hash(key);
-    }
+    //    unsigned int operator[](const char* key)
+    //    {
+    //        unsigned int index = hash(key);
+    //        return m_table[index];
+    //    }
 
     void insert(Key key, T* ptr)
     {
@@ -84,11 +80,7 @@ public:
         auto it = m_table[index].begin();
         for (; it != m_table[index].end(); ++it)
         {
-            if ((*it) == m_table[index])
-            {
-                m_table[index].erase(it);
-                return;
-            }
+            m_table[index].erase(it);
         }
     }
 };
