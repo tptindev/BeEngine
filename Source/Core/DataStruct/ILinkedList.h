@@ -28,7 +28,7 @@ public:
             int i = 0;;
             SNode<T> *ptr = list->m_head;
             while (ptr != nullptr) {
-                out << "[" << ptr << "][" << i << "][" << ptr->data << "]" << std::endl;
+                out << "[" << i << "][" << ptr << "][" << ptr->data << "]" << std::endl;
                 ptr = ptr->next;
                 i++;
             }

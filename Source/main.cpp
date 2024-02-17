@@ -20,13 +20,14 @@ int main(int argc, char *argv[])
 
 
     CHashTable<const char*, int> hashTable(256);
-    hashTable.insert("Tinne", &list[0]);
+    hashTable.insert("Tinne", &list[3]);
     hashTable.insert("King", &list[1]);
+    hashTable.insert("Khog", &list[2]);
 
     std::cout << hashTable << std::endl;
 
-    hashTable.remove("Tinne");
-    std::cout << hashTable << std::endl;
+//    hashTable.remove("Tinne");
+//    std::cout << hashTable << std::endl;
 
 
     bool initialized = CEngine::instance()->initialize();

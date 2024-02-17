@@ -11,7 +11,7 @@ class CHashTable
 {
 private:
     size_t m_max_capacity;
-    CDoublyLinkedList<T*> m_table;
+    CDoublyLinkedList<T*> *m_table;
 
 private:
     unsigned int hash(const char* key)
@@ -35,25 +35,25 @@ public:
     CHashTable(size_t capacity)
         : m_max_capacity(capacity)
     {
-        for (int i = 0; i < static_cast<int>(m_max_capacity); i++)
-        {
-            m_table.push_back(nullptr);
-        }
+        m_table = new CDoublyLinkedList<T*>[m_max_capacity];
     }
 
     friend std::ostream& operator<<(std::ostream& out,  CHashTable& obj)
     {
-        int i = 0;
-        auto it = obj.m_table.begin();
-        while (it != obj.m_table.end())
+        out << "\nSTART ----------\n";
+        for (int j = 0; j < static_cast<int>(obj.m_max_capacity); j++)
         {
-            if(*it != nullptr)
+            auto it = obj.m_table[j].begin();
+            while (it != obj.m_table[j].end())
             {
-                out << "[" << (*it) << "][" << i << "][" << ((*it) == nullptr? -1: *(*it)) << "]" << std::endl;
+                if(*it != nullptr)
+                {
+                    out << "[" << j << "][" << (*it) << "][" << ((*it) == nullptr? -1: *(*it)) << "]\n";
+                }
+                ++it;
             }
-            ++it;
-            ++i;
         }
+        out << "END -----------\n";
         return out;
     }
 
@@ -73,7 +73,7 @@ public:
         else
         {
             int index = hash(key);
-            if(index < m_table.count())  m_table[index] = ptr;
+            if(index < static_cast<int>(m_max_capacity) && index >= 0)  m_table[index].push_back(ptr);
             else return;
         }
     }
@@ -81,12 +81,12 @@ public:
     void remove(Key key)
     {
         int index = hash(key);
-        auto it = m_table.begin();
-        for (; it != m_table.end(); ++it)
+        auto it = m_table[index].begin();
+        for (; it != m_table[index].end(); ++it)
         {
             if ((*it) == m_table[index])
             {
-                m_table.erase(it);
+                m_table[index].erase(it);
                 return;
             }
         }
