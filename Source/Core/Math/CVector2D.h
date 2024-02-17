@@ -85,12 +85,10 @@ public:
         }
     }
 
-    CVector2D<T> perp()
-    {
-        CVector2D<T> vec = *this;
-        swap(vec.x, vec.y);
-        vec *= CVector2D<T>(static_cast<T>(-1), static_cast<T>(1));
-        return vec;
+    // Perpendicular vector
+    CVector2D perp() const {
+        // Rotate vector by 90 degrees counterclockwise
+        return CVector2D(-y, x);
     }
 
     // Static method to calculate distance between two vectors
