@@ -10,13 +10,13 @@ class CRenderer2D: public ARenderer
 private:
     static CRenderer2D* s_instance;
     static SDL_Renderer* s_renderer;
-    SDL_Window* m_window;
     CRenderer2D();
+    SDL_Window* m_window;
 public:
-    CRenderer2D(const CRenderer2D &) = default; // copy constructor
-    CRenderer2D(CRenderer2D &&) = default; // move constructor
-    CRenderer2D &operator=(const CRenderer2D &) = default;
-    CRenderer2D &operator=(CRenderer2D &&) = default;
+    CRenderer2D(const CRenderer2D &) = delete; // copy constructor
+    CRenderer2D(CRenderer2D &&) = delete; // move constructor
+    CRenderer2D &operator=(const CRenderer2D &) = delete;
+    CRenderer2D &operator=(CRenderer2D &&) = delete;
     static CRenderer2D *instance();
     static SDL_Renderer *renderer();
 
