@@ -1,16 +1,17 @@
-#ifndef CHASH_H
-#define CHASH_H
+#ifndef CHASHTABLE_H
+#define CHASHTABLE_H
 
 #include <string.h>
 #include <stdio.h>
+#include <iostream>
 #include "CDoublyLinkedList.h"
 
-template<typename Key, typename Value>
-class CHash
+template<typename Key, typename T>
+class CHashTable
 {
 private:
-    size_t m_max_capacity = sizeof(Key);
-    CDoublyLinkedList<Value*> m_table;
+    size_t m_max_capacity;
+    CDoublyLinkedList<T*> m_table;
 
 private:
     unsigned int hash(const char* key)
@@ -31,12 +32,29 @@ private:
     }
 
 public:
-    CHash()
+    CHashTable(size_t capacity)
+        : m_max_capacity(capacity)
     {
         for (int i = 0; i < static_cast<int>(m_max_capacity); i++)
         {
             m_table.push_back(nullptr);
         }
+    }
+
+    friend std::ostream& operator<<(std::ostream& out,  CHashTable& obj)
+    {
+        int i = 0;
+        auto it = obj.m_table.begin();
+        while (it != obj.m_table.end())
+        {
+            if(*it != nullptr)
+            {
+                out << "[" << (*it) << "][" << i << "][" << ((*it) == nullptr? -1: *(*it)) << "]" << std::endl;
+            }
+            ++it;
+            ++i;
+        }
+        return out;
     }
 
     unsigned int operator()(const char* key)
@@ -49,15 +67,16 @@ public:
         return hash(key);
     }
 
-    void insert(Key key, Value* ptr)
+    void insert(Key key, T* ptr)
     {
         if(ptr == nullptr) return;
         else
         {
             int index = hash(key);
-            m_table[index] = ptr;
+            if(index < m_table.count())  m_table[index] = ptr;
+            else return;
         }
     }
 };
 
-#endif // CHASH_H
+#endif // CHASHTABLE_H

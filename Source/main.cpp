@@ -2,7 +2,7 @@
 #include <LoggerDefines.h>
 #include <CEngine.h>
 #include <Utils.h>
-#include <CHash.h>
+#include <CHashTable.h>
 #include <CDoublyLinkedList.h>
 
 int main(int argc, char *argv[])
@@ -19,6 +19,11 @@ int main(int argc, char *argv[])
     _DEBUG("%d", list[2]);
 
 
+    CHashTable<const char*, int> hashTable(256);
+    hashTable.insert("Tinne", &list[0]);
+    hashTable.insert("King", &list[1]);
+
+    std::cout << hashTable << std::endl;
 
     bool initialized = CEngine::instance()->initialize();
     if(initialized)
