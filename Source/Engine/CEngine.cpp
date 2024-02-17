@@ -2,8 +2,8 @@
 #include <LoggerDefines.h>
 #include <CMemoryManager.h>
 #include <CRenderer2D.h>
+#include <CEventDispatcher.h>
 #include <SDL_timer.h>
-#include <SDL_events.h>
 
 CEngine* CEngine::s_instance = nullptr;
 bool CEngine::s_running = false;
@@ -21,25 +21,7 @@ CEngine::~CEngine()
 
 void CEngine::handle_events()
 {
-    SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
-        switch (event.type) {
-        case SDL_QUIT:
-            s_running = false;
-            break;
-        case SDL_KEYDOWN:
-        {
-            if(event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                s_running = false;
-                break;
-            }
-        }
-        default:
-            break;
-        }
-    }
+    CEventDispatcher::instance()->dispatchEvent();
 }
 
 void CEngine::update(float dt)
@@ -68,9 +50,25 @@ bool CEngine::initialize(const char* title, float width, float height)
         return false;
     }
 
-    // [2] start game engine
+    // [2] register event handler
+    registerEvent();
+
+    // [3] start game engine
     s_running = true;
+
     return true;
+}
+
+void CEngine::registerEvent()
+{
+    CEventDispatcher* dispatcher = CEventDispatcher::instance();
+    dispatcher->addEventListener(SDL_QUIT, [&](SDL_Event& event){ s_running = false; });
+    dispatcher->addEventListener(SDL_KEYDOWN, [&](SDL_Event& event){
+        if(event.key.keysym.sym == SDLK_ESCAPE)
+        {
+            s_running = false;
+        }
+    });
 }
 
 void CEngine::loop()

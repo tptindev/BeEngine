@@ -27,6 +27,7 @@ public:
     static CEngine *instance();
 
     bool initialize(const char* title, float width, float height);
+    void registerEvent();
     void loop();
     void clean();
     void quit();
