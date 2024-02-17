@@ -2,30 +2,27 @@
 add_executable(${PROJECT_NAME} main.cpp)
 
 add_subdirectory(Core)
-target_link_libraries(${PROJECT_NAME} PRIVATE core_module)
-
 add_subdirectory(ECS)
-target_link_libraries(${PROJECT_NAME} PRIVATE ecs_module)
-
 add_subdirectory(Utils)
-target_link_libraries(${PROJECT_NAME} PRIVATE utils_module)
-
 add_subdirectory(Graphics)
-target_link_libraries(${PROJECT_NAME} PRIVATE graphics_module)
-
 add_subdirectory(Input)
-target_link_libraries(${PROJECT_NAME} PRIVATE input_module)
-
 add_subdirectory(Net)
-target_link_libraries(${PROJECT_NAME} PRIVATE net_module)
-
 add_subdirectory(Audio)
-target_link_libraries(${PROJECT_NAME} PRIVATE audio_module)
-
 add_subdirectory(Physics)
-
 add_subdirectory(Engine)
-target_link_libraries(${PROJECT_NAME} PRIVATE engine_module)
+add_subdirectory(SceneGraph)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    core_module
+    engine_module
+    scenegraph_module
+    ecs_module
+    utils_module
+    graphics_module
+    input_module
+    net_module
+    audio_module
+)
 
 # Specify include directories for the main executable
 target_include_directories(${PROJECT_NAME} PRIVATE
@@ -36,4 +33,5 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Net
     ${CMAKE_CURRENT_SOURCE_DIR}/Audio
     ${CMAKE_CURRENT_SOURCE_DIR}/ECS
+    ${CMAKE_CURRENT_SOURCE_DIR}/SceneGraph
 )
