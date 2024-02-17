@@ -27,7 +27,6 @@ bool CEngine::initialize()
 
 void CEngine::loop()
 {
-
 }
 
 void CEngine::clean()
@@ -37,6 +36,9 @@ void CEngine::clean()
 
 void CEngine::quit()
 {
-
+    // Get elapsed time
+    _DEBUG("Elapsed milliseconds: %lld",m_timer.elapsed_milliseconds());
+    _DEBUG("Elapsed seconds: %lf",m_timer.elapsed_seconds());
+    _DEBUG("Elapsed minutes: %lf",m_timer.elapsed_minutes());
 }
 

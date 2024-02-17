@@ -2,6 +2,7 @@
 #define __CENGINE_H__
 
 #include "CObject.h"
+#include "CTimer.h"
 
 class CEngine: public CObject
 {
@@ -11,6 +12,7 @@ private:
     ~CEngine();
 
     bool m_running;
+    CTimer m_timer;
 
 public:
     CEngine(CEngine &other) = delete;
