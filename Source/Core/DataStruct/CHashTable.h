@@ -77,6 +77,20 @@ public:
             else return;
         }
     }
+
+    void remove(Key key)
+    {
+        int index = hash(key);
+        auto it = m_table.begin();
+        for (; it != m_table.end(); ++it)
+        {
+            if ((*it) == m_table[index])
+            {
+                m_table.erase(it);
+                return;
+            }
+        }
+    }
 };
 
 #endif // CHASHTABLE_H

@@ -25,7 +25,7 @@ public:
 
     int cells() { return m_cells; }
 
-    int hash(int x, int y) // cell index
+    int hash(int x, int y) // get cell index
     {
         int hashX = x / m_cell_width;
         int hashY = y / m_cell_height;
@@ -36,7 +36,7 @@ public:
 
         return (hashY * this->columns()) + hashX;
     }
-    int hash(float x, float y)
+    int hash(float x, float y) // get cell index
     {
         return hash(static_cast<int>(x), static_cast<int>(y));
     }
