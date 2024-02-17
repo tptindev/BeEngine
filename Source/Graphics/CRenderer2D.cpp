@@ -44,7 +44,7 @@ bool CRenderer2D::ready()
     return true;
 }
 
-bool CRenderer2D::openWindow(const char* title, float width, float height)
+bool CRenderer2D::openWindow(const char* title, int width, int height)
 {
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     UNUSED(window_flags)
