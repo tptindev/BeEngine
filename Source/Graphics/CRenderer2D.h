@@ -29,7 +29,6 @@ public:
     virtual void quit() override;
     virtual void beginDraw() override;
     virtual void endDraw() override;
-    virtual void render() override;
 };
 
 #endif // CRENDERER2D_H

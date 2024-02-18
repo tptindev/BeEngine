@@ -31,7 +31,11 @@ void CEngine::update(float dt)
 
 void CEngine::render()
 {
-    m_renderer->render();
+    m_renderer->beginDraw();
+
+    // Render code goes here
+
+    m_renderer->endDraw();
 }
 
 CEngine *CEngine::instance()

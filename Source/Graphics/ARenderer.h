@@ -11,7 +11,6 @@ public:
     virtual void quit() = 0;
     virtual void beginDraw() = 0;
     virtual void endDraw() = 0;
-    virtual void render() {}
 };
 
 #endif // ARENDERER_H
