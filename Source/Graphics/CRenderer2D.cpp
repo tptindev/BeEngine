@@ -1,6 +1,7 @@
 #include "CRenderer2D.h"
 #include <LoggerDefines.h>
 #include <SDL_render.h>
+#include "Widgets/CWindow.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -44,12 +45,12 @@ bool CRenderer2D::ready()
     return true;
 }
 
-bool CRenderer2D::openWindow(const char* title, int width, int height)
+bool CRenderer2D::openWindow(CWindow* window)
 {
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     UNUSED(window_flags)
 
-    m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
+    m_window = SDL_CreateWindow(window->title(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window->width(), window->height(), SDL_WINDOW_SHOWN);
 
     // m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_FULLSCREEN_DESKTOP);
     // SDL_SetWindowBordered(m_window, SDL_TRUE);
@@ -62,7 +63,7 @@ bool CRenderer2D::openWindow(const char* title, int width, int height)
         return false;
     }
 
-    _DEBUG("Window size: %d, %d", width, height);
+    _DEBUG("Window size: %d, %d", window->width(), window->height());
 
     s_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     if (s_renderer == nullptr)
@@ -70,6 +71,10 @@ bool CRenderer2D::openWindow(const char* title, int width, int height)
         _DEBUG("Could not create renderer: %s", SDL_GetError());
         return false;
     }
+
+    window->signalIsFull().connect([&](bool isFull) ->void {
+        SDL_SetWindowFullscreen(m_window, (isFull? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
+    });
 
     return true;
 }

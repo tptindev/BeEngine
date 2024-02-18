@@ -1,10 +1,12 @@
 
 #include <LoggerDefines.h>
 #include <CEngine.h>
+#include <Widgets/CWindow.h>
 
 int main(int argc, char *argv[])
 {
-    bool initialized = CEngine::instance()->initialize("xin_chao", 720, 480);
+    CWindow window("xin_chao", 720, 480);
+    bool initialized = CEngine::instance()->initialize(&window);
     if(initialized)
     {
         CEngine::instance()->loop();

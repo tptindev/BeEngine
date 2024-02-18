@@ -24,7 +24,7 @@ public:
 public:
     virtual void initialize() override;
     virtual bool ready() override;
-    virtual bool openWindow(const char* title, int width, int height) override;
+    virtual bool openWindow(CWindow* window) override;
     virtual bool destroyWindow() override;
     virtual void quit() override;
     virtual void beginDraw() override;

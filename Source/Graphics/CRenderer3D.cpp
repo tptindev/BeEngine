@@ -21,7 +21,7 @@ bool CRenderer3D::ready()
     return false;
 }
 
-bool CRenderer3D::openWindow(const char *title, int width, int height)
+bool CRenderer3D::openWindow(CWindow* window)
 {
     return false;
 }

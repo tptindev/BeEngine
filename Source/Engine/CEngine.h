@@ -4,6 +4,7 @@
 #include "CObject.h"
 #include "CTimer.h"
 
+class CWindow;
 class CRenderer2D;
 class CEngine: public CObject
 {
@@ -13,8 +14,9 @@ private:
     explicit CEngine(CObject* parent = nullptr);
     ~CEngine();
 
-    CRenderer2D* m_renderer;
+    CRenderer2D* m_renderer = nullptr;
     CTimer m_timer;
+    CWindow *m_win = nullptr;;
 
 private:
     void handle_events();
@@ -28,7 +30,7 @@ public:
     void operator=(const CEngine &) = delete;
     static CEngine *instance();
 
-    bool initialize(const char* title, float width, float height);
+    bool initialize(CWindow* window);
     void registerEvent();
     void loop();
     void clean();

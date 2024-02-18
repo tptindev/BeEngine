@@ -15,20 +15,20 @@ public:
 public:
     CSignal()
     {
-        _DEBUG("%s", __FUNCTION__);
+        _DEBUG("%s [%p]", __FUNCTION__, this);
     }
     ~CSignal()
     {
-        _DEBUG("%s", __FUNCTION__);
+        _DEBUG("%s [%p]", __FUNCTION__, this);
     }
 
-    bool connect(SlotType& slot)
+    bool connect(const SlotType& slot)
     {
         _DEBUG("CONNECT SLOT [%p] -> SIGNAL [%p]", &slot, this);
         typename std::vector<SlotType>::iterator it = m_slots.begin();
         while (it != m_slots.end())
         {
-            if((*it) == &slot) return false;
+            if(&(*it) == &slot) return false;
             ++it;
         }
         m_slots.push_back(slot);

@@ -2,6 +2,7 @@
 #include <LoggerDefines.h>
 #include <CMemoryManager.h>
 #include <CRenderer2D.h>
+#include <Widgets/CWindow.h>
 #include <CEventDispatcher.h>
 #include <SDL_timer.h>
 
@@ -43,16 +44,17 @@ CEngine *CEngine::instance()
     return s_instance = (s_instance == nullptr)? new CEngine(): s_instance;
 }
 
-bool CEngine::initialize(const char* title, float width, float height)
+bool CEngine::initialize(CWindow* window)
 {
     if (!m_renderer->ready())
         return false;
 
     // [1] init SDL and create the Game Window and Renderer
-    if (!m_renderer->openWindow(title, width, height))
+    if (!m_renderer->openWindow(window))
     {
         return false;
     }
+    m_win = window;
 
     // [2] register event handler
     registerEvent();
@@ -72,6 +74,10 @@ void CEngine::registerEvent()
         if(sym == SDLK_ESCAPE)
         {
             s_running = false;
+        }
+        else if(sym == SDLK_F11)
+        {
+            m_win->toggleIsFull();
         }
     });
 }
