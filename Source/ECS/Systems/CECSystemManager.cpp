@@ -33,7 +33,7 @@ void CECSystemManager::init(std::vector<CEntity*> &entities)
 
 void CECSystemManager::update(std::vector<CEntity*> &entities, float dt)
 {
-//    _DEBUG("START_UPDATE")
+    _DEBUG("START_UPDATE");
     for(auto &system: m_systems)
     {
         // do update for each entity
@@ -42,7 +42,7 @@ void CECSystemManager::update(std::vector<CEntity*> &entities, float dt)
             system->update(entity, dt);
         }
     }
-//    _DEBUG("END_UPDATE")
+    _DEBUG("END_UPDATE");
 }
 
 
