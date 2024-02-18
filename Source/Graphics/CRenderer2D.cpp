@@ -47,10 +47,12 @@ bool CRenderer2D::ready()
 
 bool CRenderer2D::openWindow(CWindow* window)
 {
-    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    UNUSED(window_flags)
-
-    m_window = SDL_CreateWindow(window->title(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window->width(), window->height(), SDL_WINDOW_SHOWN);
+    m_window = SDL_CreateWindow(window->title(),
+                                SDL_WINDOWPOS_UNDEFINED,
+                                SDL_WINDOWPOS_UNDEFINED,
+                                window->width(),
+                                window->height(),
+                                SDL_WINDOW_SHOWN);
 
     if (m_window == nullptr)
     {
