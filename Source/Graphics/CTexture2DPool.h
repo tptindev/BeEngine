@@ -20,8 +20,8 @@ public:
     ~CTexture2DPool();
     static CTexture2DPool *instance();
 
-    bool load(const char *id, const char *src);
-    void remove(const char *id);
+    virtual bool load(const char *id, const char *src) override;
+    virtual void remove(const char *id) override;
 };
 
 #endif // CTEXTURE2DPOOL_H
