@@ -28,13 +28,23 @@ int CWindow::height() const
     return m_height;
 }
 
-CSignal<void, bool> &CWindow::signalIsFull()
+CSignal<void, bool> &CWindow::stateChanged()
 {
-    return m_signal_is_full;
+    return m_state_changed;
+}
+
+int CWindow::x() const
+{
+    return m_x;
+}
+
+int CWindow::y() const
+{
+    return m_y;
 }
 
 void CWindow::toggleIsFull()
 {
     m_is_full = !m_is_full;
-    m_signal_is_full.emit(std::move(m_is_full));
+    m_state_changed.emit(std::move(m_is_full));
 }

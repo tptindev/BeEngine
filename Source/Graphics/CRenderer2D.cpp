@@ -52,9 +52,6 @@ bool CRenderer2D::openWindow(CWindow* window)
 
     m_window = SDL_CreateWindow(window->title(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window->width(), window->height(), SDL_WINDOW_SHOWN);
 
-    // m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_FULLSCREEN_DESKTOP);
-    // SDL_SetWindowBordered(m_window, SDL_TRUE);
-
     if (m_window == nullptr)
     {
         // In the case that the window could not be made...
@@ -72,7 +69,7 @@ bool CRenderer2D::openWindow(CWindow* window)
         return false;
     }
 
-    window->signalIsFull().connect([&](bool isFull) ->void {
+    window->stateChanged().connect([&](bool isFull) ->void {
         SDL_SetWindowFullscreen(m_window, (isFull? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
     });
 

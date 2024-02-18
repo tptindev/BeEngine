@@ -16,16 +16,21 @@ public:
     int width() const;
     int height() const;
 
-    CSignal<void, bool>& signalIsFull();
+    CSignal<void, bool>& stateChanged();
+
+    int x() const;
+    int y() const;
 
 private:
     const char* m_title;
     int m_width, m_height;
+    int m_x, m_y;
     bool m_is_full;
+    bool m_active;
 
 
 private: // signals declare
-    CSignal<void, bool> m_signal_is_full;
+    CSignal<void, bool> m_state_changed;
 };
 
 #endif // CWINDOW_H
