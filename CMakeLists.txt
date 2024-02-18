@@ -20,7 +20,7 @@ set(INCLUDE_DIR
     "${CMAKE_SOURCE_DIR}/3rd/include/SDL2"
     "${CMAKE_SOURCE_DIR}/3rd/include/TinyXML2")
 
-set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lopengl32 -lglfw3 -lgdi32")
+set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lopengl32 -lglfw3 -lgdi32")
 
 message("Root source directory: ${CMAKE_SOURCE_DIR}")
 message("Output directory: ${CMAKE_BINARY_DIR}")
@@ -29,6 +29,7 @@ file(COPY
     "${CMAKE_SOURCE_DIR}/3rd/bin/SDL2/SDL2.dll"
     "${CMAKE_SOURCE_DIR}/3rd/bin/SDL2/SDL2_image.dll"
     "${CMAKE_SOURCE_DIR}/3rd/bin/SDL2/SDL2_mixer.dll"
+    "${CMAKE_SOURCE_DIR}/3rd/bin/SDL2/SDL2_ttf.dll"
     DESTINATION ${CMAKE_BINARY_DIR})
 
 ## Get a list of all subdirectories in the 3rd/bin directory
