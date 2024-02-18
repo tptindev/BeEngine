@@ -11,7 +11,7 @@ template<typename Key, typename T, size_t TableSize>
 class CHashTable
 {
 private:
-    size_t m_max_capacity;
+    size_t m_capacity;
     CDoublyLinkedList<T*> *m_table;
 
 private:
@@ -22,7 +22,7 @@ private:
         for (int i = 0; i < length; i++)
         {
             hash_value += key[i];
-            hash_value = (hash_value + key[i]) % m_max_capacity;
+            hash_value = (hash_value + key[i]) % m_capacity;
         }
 
         return hash_value;
@@ -30,20 +30,20 @@ private:
 
     unsigned int hash(Key key)
     {
-        return (key % static_cast<int>(m_max_capacity));
+        return (key % static_cast<int>(m_capacity));
     }
 
 public:
     CHashTable()
-        : m_max_capacity(TableSize)
+        : m_capacity(TableSize)
     {
-        m_table = new CDoublyLinkedList<T*>[m_max_capacity];
+        m_table = new CDoublyLinkedList<T*>[m_capacity];
     }
 
     friend std::ostream& operator<<(std::ostream& out,  CHashTable& obj)
     {
         out << "\nSTART ----------\n";
-        for (int j = 0; j < static_cast<int>(obj.m_max_capacity); j++)
+        for (int j = 0; j < static_cast<int>(obj.m_capacity); j++)
         {
             auto it = obj.m_table[j].begin();
             while (it != obj.m_table[j].end())
@@ -62,7 +62,7 @@ public:
     CDoublyLinkedList<T*>& operator[](const char* key)
     {
         unsigned int index = hash(key);
-        if (index < 0 || index >= m_max_capacity) {
+        if (index < 0 || index >= m_capacity) {
             throw std::out_of_range("Index out of range");
         }
         return m_table[index];
@@ -74,7 +74,7 @@ public:
         else
         {
             int index = hash(key);
-            if(index < static_cast<int>(m_max_capacity) && index >= 0)  m_table[index].push_back(ptr);
+            if(index < static_cast<int>(m_capacity) && index >= 0)  m_table[index].push_back(ptr);
             else return;
         }
     }

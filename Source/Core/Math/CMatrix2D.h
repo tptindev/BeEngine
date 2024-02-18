@@ -10,6 +10,10 @@
 template<typename T>
 class CMatrix2D
 {
+private:
+    int m_rows, m_columns;
+    T *m_data = nullptr;
+
 public:
     explicit CMatrix2D(): m_rows(10), m_columns(10)
     {
@@ -141,9 +145,6 @@ public:
         swap(first.m_columns, second.m_columns);
         swap(first.m_data, second.m_data);
     }
-private:
-    int m_rows, m_columns;
-    T *m_data = nullptr;
 };
 
 using Matrix2DI = CMatrix2D<int>;
