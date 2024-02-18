@@ -11,6 +11,11 @@ CEntityManager::CEntityManager()
     }
 }
 
+CEntityManager::~CEntityManager()
+{
+
+}
+
 CEntityManager *CEntityManager::instance()
 {
     return s_instance = (s_instance == nullptr)? new CEntityManager():s_instance;

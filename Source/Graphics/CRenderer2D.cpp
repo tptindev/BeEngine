@@ -81,6 +81,12 @@ bool CRenderer2D::destroyWindow()
     return (s_renderer == nullptr && m_window == nullptr);
 }
 
+void CRenderer2D::quit()
+{
+    IMG_Quit();
+    SDL_Quit();
+}
+
 void CRenderer2D::beginDraw()
 {
     SDL_RenderClear(s_renderer);

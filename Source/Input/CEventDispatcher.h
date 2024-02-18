@@ -14,7 +14,7 @@ private:
     static CEventDispatcher *s_instance;
 
     std::mutex              m_mutex;
-    std::unordered_map<SDL_EventType, EventHandler> m_event_handlers;
+    std::unordered_map<Uint32, EventHandler> m_event_handlers;
 public:
     CEventDispatcher(const CEventDispatcher &) = delete;
     CEventDispatcher(CEventDispatcher &&) = delete;

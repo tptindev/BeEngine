@@ -8,7 +8,7 @@
 CEngine* CEngine::s_instance = nullptr;
 bool CEngine::s_running = false;
 CEngine::CEngine(CObject *parent)
-    :CObject(parent)
+    :CObject(parent), m_renderer(CRenderer2D::instance())
 {
     _DEBUG("%s", __FUNCTION__);
 
@@ -31,7 +31,7 @@ void CEngine::update(float dt)
 
 void CEngine::render()
 {
-
+    m_renderer->render();
 }
 
 CEngine *CEngine::instance()
@@ -41,11 +41,11 @@ CEngine *CEngine::instance()
 
 bool CEngine::initialize(const char* title, float width, float height)
 {
-    if (!CRenderer2D::instance()->ready())
+    if (!m_renderer->ready())
         return false;
 
     // [1] init SDL and create the Game Window and Renderer
-    if (!CRenderer2D::instance()->openWindow(title, width, height))
+    if (!m_renderer->openWindow(title, width, height))
     {
         return false;
     }
@@ -64,7 +64,8 @@ void CEngine::registerEvent()
     CEventDispatcher* dispatcher = CEventDispatcher::instance();
     dispatcher->addEventListener(SDL_QUIT, [&](SDL_Event& event){ s_running = false; });
     dispatcher->addEventListener(SDL_KEYDOWN, [&](SDL_Event& event){
-        if(event.key.keysym.sym == SDLK_ESCAPE)
+        SDL_Keycode sym = event.key.keysym.sym;
+        if(sym == SDLK_ESCAPE)
         {
             s_running = false;
         }
@@ -111,14 +112,20 @@ void CEngine::loop()
 
 void CEngine::clean()
 {
-
+    m_renderer->destroyWindow();
+    _DEBUG("Game Release Resource");
 }
 
 void CEngine::quit()
 {
+    m_renderer->quit();
+
     // Get elapsed time
     _DEBUG("Elapsed milliseconds: %lld",m_timer.elapsed_milliseconds());
     _DEBUG("Elapsed seconds: %lf",m_timer.elapsed_seconds());
     _DEBUG("Elapsed minutes: %lf",m_timer.elapsed_minutes());
+    _DEBUG("Elapsed hours: %lf",m_timer.elapsed_hours());
+    _DEBUG("Elapsed days: %lf",m_timer.elapsed_days());
+    _DEBUG("Game Quit");
 }
 

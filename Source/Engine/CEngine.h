@@ -4,6 +4,7 @@
 #include "CObject.h"
 #include "CTimer.h"
 
+class CRenderer2D;
 class CEngine: public CObject
 {
 private:
@@ -12,6 +13,7 @@ private:
     explicit CEngine(CObject* parent = nullptr);
     ~CEngine();
 
+    CRenderer2D* m_renderer;
     CTimer m_timer;
 
 private:

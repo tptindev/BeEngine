@@ -20,6 +20,8 @@ public:
         POOL
     };
 
+    CMemoryManager(CMemoryManager &&) = delete;
+    CMemoryManager &operator=(CMemoryManager &&) = delete;
     CMemoryManager(CMemoryManager &other) = delete;
     void operator=(const CMemoryManager &) = delete;
     static CMemoryManager* instance();

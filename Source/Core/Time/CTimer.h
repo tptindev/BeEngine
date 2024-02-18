@@ -28,6 +28,16 @@ public:
     double elapsed_minutes() const {
         return elapsed_seconds() / 60.0;
     }
+
+    // Get elapsed time in hours
+    double elapsed_hours() const {
+        return elapsed_minutes() / 60.0;
+    }
+
+    // Get elapsed time in days
+    double elapsed_days() const {
+        return elapsed_hours() / 24.0;
+    }
 };
 
 #endif // CTIMER_H

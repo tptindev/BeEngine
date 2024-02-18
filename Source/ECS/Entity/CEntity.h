@@ -64,7 +64,7 @@ public:
         if(m_components.empty()) return nullptr;
         if(m_components.find(compName) == m_components.end())
         {
-            //            _DEBUG("Component [%s]  of Entity [%d] does not exist", compName, this->id());
+            _DEBUG("Component [%s]  of Entity [%d] does not exist", compName, this->id());
             return nullptr;
         }
         return static_cast<T*>(m_components.at(compName));

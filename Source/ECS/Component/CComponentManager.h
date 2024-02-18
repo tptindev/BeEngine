@@ -9,6 +9,7 @@ class CComponentManager
 {
 private:
     CComponentManager();
+    ~CComponentManager();
 
     static CComponentManager                        *s_instance;
     ComponentID                                     m_component_count{MIN_COMPONENT_COUNT};
@@ -16,10 +17,13 @@ private:
     std::unordered_map<const char*, ComponentID>    m_dictionary;
 
 public:
-    ~CComponentManager();
-    static CComponentManager                    *instance();
+    CComponentManager(const CComponentManager &) = delete;
+    CComponentManager(CComponentManager &&) = delete;
+    CComponentManager &operator=(const CComponentManager &) = delete;
+    CComponentManager &operator=(CComponentManager &&) = delete;
+    static CComponentManager *instance();
 
-    bool createComponent(CComponent*);
+    bool createComponent(CComponent *);
 };
 
 

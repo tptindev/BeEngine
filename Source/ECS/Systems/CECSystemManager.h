@@ -31,10 +31,14 @@ private:
     CSpawnSystem                               m_spawn_system;
 
 public:
+    CECSystemManager(const CECSystemManager &) = delete;
+    CECSystemManager(CECSystemManager &&) = delete;
+    CECSystemManager &operator=(const CECSystemManager &) = delete;
+    CECSystemManager &operator=(CECSystemManager &&) = delete;
     static CECSystemManager *instance();
 
-    void init(std::vector<CEntity*> &entities);
-    void update(std::vector<CEntity*> &entities, float dt);
+    void init(std::vector<CEntity *> &entities);
+    void update(std::vector<CEntity *> &entities, float dt);
 };
 
 

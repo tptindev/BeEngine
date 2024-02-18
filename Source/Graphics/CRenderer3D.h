@@ -21,6 +21,7 @@ public:
     virtual bool ready() override;
     virtual bool openWindow(const char *title, int width, int height) override;
     virtual bool destroyWindow() override;
+    virtual void quit() override;
     virtual void beginDraw() override;
     virtual void endDraw() override;
 };
