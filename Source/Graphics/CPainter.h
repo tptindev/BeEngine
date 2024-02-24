@@ -1,7 +1,6 @@
-#ifndef C2DPAINTER_H
-#define C2DPAINTER_H
+#ifndef CPAINTER_H
+#define CPAINTER_H
 
-#include "APainter.h"
 
 class CLine;
 class CPoint;
@@ -9,7 +8,7 @@ class CRect;
 class CPolygon;
 class CImage;
 
-class C2DPainter : public APainter
+class C2DPainter
 {
 public:
     C2DPainter();
@@ -25,4 +24,4 @@ public:
     void drawLine(int x1, int y1, int x2, int y2) {}
 };
 
-#endif // C2DPAINTER_H
+#endif // CPAINTER_H

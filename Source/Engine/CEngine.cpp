@@ -1,36 +1,36 @@
-#include "CEngine2D.h"
+#include "CEngine.h"
 #include <LoggerDefines.h>
 #include <CMemoryManager.h>
-#include <CRenderer2D.h>
-#include <Widgets/CSDLWindow.h>
+#include <CRenderer.h>
+#include <Widgets/CWindow.h>
 #include <CEventDispatcher.h>
 #include <SDL_timer.h>
 
-CEngine2D* CEngine2D::s_instance = nullptr;
-bool CEngine2D::s_running = false;
-CEngine2D::CEngine2D(CObject *parent)
-    :CObject(parent), m_renderer(CRenderer2D::instance())
+CEngine* CEngine::s_instance = nullptr;
+bool CEngine::s_running = false;
+CEngine::CEngine(CObject *parent)
+    :CObject(parent), m_renderer(CRenderer::instance())
 {
     _DEBUG("%s", __FUNCTION__);
 
 }
 
-CEngine2D::~CEngine2D()
+CEngine::~CEngine()
 {
     _DEBUG("%s", __FUNCTION__);
 }
 
-void CEngine2D::handle_events()
+void CEngine::handle_events()
 {
     CEventDispatcher::instance()->dispatchEvent();
 }
 
-void CEngine2D::update(float dt)
+void CEngine::update(float dt)
 {
 
 }
 
-void CEngine2D::render()
+void CEngine::render()
 {
     m_renderer->beginDraw();
 
@@ -39,12 +39,12 @@ void CEngine2D::render()
     m_renderer->endDraw();
 }
 
-CEngine2D *CEngine2D::instance()
+CEngine *CEngine::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CEngine2D(): s_instance;
+    return s_instance = (s_instance == nullptr)? new CEngine(): s_instance;
 }
 
-bool CEngine2D::initialize(CSDLWindow* window)
+bool CEngine::initialize(CWindow* window)
 {
     if (!m_renderer->ready())
         return false;
@@ -55,7 +55,7 @@ bool CEngine2D::initialize(CSDLWindow* window)
         return false;
     }
 
-    m_window_full.connect(std::bind(&CSDLWindow::toggleIsFull, window));
+    m_window_full.connect(std::bind(&CWindow::toggleIsFull, window));
 
     // [2] register event handler
     registerEvent();
@@ -66,7 +66,7 @@ bool CEngine2D::initialize(CSDLWindow* window)
     return true;
 }
 
-void CEngine2D::registerEvent()
+void CEngine::registerEvent()
 {
     CEventDispatcher* dispatcher = CEventDispatcher::instance();
     dispatcher->addEventListener(SDL_QUIT, [&](SDL_Event& event){ s_running = false; });
@@ -83,7 +83,7 @@ void CEngine2D::registerEvent()
     });
 }
 
-void CEngine2D::loop()
+void CEngine::loop()
 {
     const int fps = 60;
     const int _1s = 1000;
@@ -121,13 +121,13 @@ void CEngine2D::loop()
     }
 }
 
-void CEngine2D::clean()
+void CEngine::clean()
 {
-    m_renderer->destroyWindow();
+    m_renderer->destroyRenderer();
     _DEBUG("Game Release Resource");
 }
 
-void CEngine2D::quit()
+void CEngine::quit()
 {
     m_renderer->quit();
 

@@ -1,8 +1,8 @@
-#include "CSDLWindow.h"
+#include "CWindow.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
-CSDLWindow::CSDLWindow(CObject *parent): CObject(parent)
+CWindow::CWindow(CObject *parent): CObject(parent)
 {
     m_title = "Undefined";
     m_width = 720;
@@ -11,7 +11,7 @@ CSDLWindow::CSDLWindow(CObject *parent): CObject(parent)
     initialize();
 }
 
-CSDLWindow::CSDLWindow(const char *title, int width, int height, CObject *parent) : CObject(parent)
+CWindow::CWindow(const char *title, int width, int height, CObject *parent) : CObject(parent)
 {
     m_title = title;
     m_width = width;
@@ -20,12 +20,12 @@ CSDLWindow::CSDLWindow(const char *title, int width, int height, CObject *parent
     initialize();
 }
 
-CSDLWindow::~CSDLWindow()
+CWindow::~CWindow()
 {
 
 }
 
-void CSDLWindow::initialize()
+void CWindow::initialize()
 {
     _DEBUG("Window Init");
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -58,24 +58,59 @@ void CSDLWindow::initialize()
     _DEBUG("Window size: %d, %d", width(), height());
 }
 
-SDL_Window *CSDLWindow::sdlWindow()
+SDL_Window *CWindow::sdlWindow()
 {
     return m_sdl_window;
 }
 
-SDL_Surface *CSDLWindow::sdlSurface()
+SDL_Surface *CWindow::sdlSurface()
 {
     return m_sdl_window_surface;
 }
 
-void CSDLWindow::update_window_surface()
+void CWindow::update_window_surface()
 {
     SDL_UpdateWindowSurface(m_sdl_window);
 }
 
-void CSDLWindow::toggleIsFull()
+void CWindow::toggleIsFull()
 {
     m_is_full = !m_is_full;
     SDL_SetWindowFullscreen(m_sdl_window, (m_is_full? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
+}
+
+const char *CWindow::title() const
+{
+    return m_title;
+}
+
+int CWindow::width() const
+{
+    return m_width;
+}
+
+int CWindow::height() const
+{
+    return m_height;
+}
+
+int CWindow::x() const
+{
+    return m_x;
+}
+
+int CWindow::y() const
+{
+    return m_y;
+}
+
+bool CWindow::is_full() const
+{
+    return m_is_full;
+}
+
+bool CWindow::active() const
+{
+    return m_active;
 }
 

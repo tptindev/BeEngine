@@ -1,26 +1,26 @@
-#include "CTexture2DPool.h"
-#include "CRenderer2D.h"
+#include "CTexturePool.h"
+#include "CRenderer.h"
 #include <SDL_render.h>
 #include <SDL_image.h>
 #include <LoggerDefines.h>
 
-CTexture2DPool* CTexture2DPool::s_instance = nullptr;
-CTexture2DPool::CTexture2DPool()
+CTexturePool* CTexturePool::s_instance = nullptr;
+CTexturePool::CTexturePool()
 {
 
 }
 
-CTexture2DPool::~CTexture2DPool()
+CTexturePool::~CTexturePool()
 {
 
 }
 
-CTexture2DPool *CTexture2DPool::instance()
+CTexturePool *CTexturePool::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CTexture2DPool(): s_instance;
+    return s_instance = (s_instance == nullptr)? new CTexturePool(): s_instance;
 }
 
-bool CTexture2DPool::load(const char *id, const char *src)
+bool CTexturePool::load(const char *id, const char *src)
 {
     bool status = false;
     if(m_textures.find(id) != m_textures.end())
@@ -30,7 +30,7 @@ bool CTexture2DPool::load(const char *id, const char *src)
     else
     {
         _DEBUG("TextureID: %s, Texture Path: %s", id, src);
-        if(CRenderer2D::renderer() == nullptr)
+        if(CRenderer::renderer() == nullptr)
         {
             _DEBUG("RENDERER NULL");
             status = false;
@@ -42,8 +42,8 @@ bool CTexture2DPool::load(const char *id, const char *src)
             _DEBUG("Cant load IMG");
             status = false;
         }
-
-        texture = SDL_CreateTextureFromSurface(CRenderer2D::renderer(), surface);
+        
+        texture = SDL_CreateTextureFromSurface(CRenderer::renderer(), surface);
         SDL_FreeSurface(surface);
         m_textures[id] = texture;
     }
@@ -51,7 +51,7 @@ bool CTexture2DPool::load(const char *id, const char *src)
     return status;
 }
 
-void CTexture2DPool::remove(const char *id)
+void CTexturePool::remove(const char *id)
 {
     if(m_textures.find(id) != m_textures.end())
     {
