@@ -2,7 +2,7 @@
 #include <LoggerDefines.h>
 #include <CMemoryManager.h>
 #include <CRenderer2D.h>
-#include <Widgets/CWindow.h>
+#include <Widgets/CSDLWindow.h>
 #include <CEventDispatcher.h>
 #include <SDL_timer.h>
 
@@ -44,7 +44,7 @@ CEngine *CEngine::instance()
     return s_instance = (s_instance == nullptr)? new CEngine(): s_instance;
 }
 
-bool CEngine::initialize(CWindow* window)
+bool CEngine::initialize(CSDLWindow* window)
 {
     if (!m_renderer->ready())
         return false;

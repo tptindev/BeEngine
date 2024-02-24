@@ -1,8 +1,8 @@
 #include "CApplication.h"
-#include "CWindow.h"
+#include "AWindow.h"
 #include <SDL_events.h>
 
-CApplication::CApplication(CWindow *window)
+CApplication::CApplication(AWindow *window)
     :m_window(window)
 {
 

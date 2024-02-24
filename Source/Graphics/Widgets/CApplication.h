@@ -2,17 +2,17 @@
 #define CAPPLICATION_H
 
 
-class CWindow;
+class AWindow;
 class CApplication
 {
 public:
-    CApplication(CWindow* window);
+    CApplication(AWindow* window);
 
     void execute();
     void quit();
 
 private:
-    CWindow* m_window;
+    AWindow* m_window;
 };
 
 #endif // CAPPLICATION_H

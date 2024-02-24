@@ -19,7 +19,7 @@ public:
 public:
     virtual void initialize() override;
     virtual bool ready() override;
-    virtual bool openWindow(CWindow* window) override;
+    virtual bool openWindow(AWindow* window) override;
     virtual bool destroyWindow() override;
     virtual void quit() override;
     virtual void beginDraw() override;

@@ -1,7 +1,7 @@
 #include "CRenderer2D.h"
 #include <LoggerDefines.h>
 #include <SDL_render.h>
-#include "Widgets/CWindow.h"
+#include "Widgets/CSDLWindow.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -45,35 +45,24 @@ bool CRenderer2D::ready()
     return true;
 }
 
-bool CRenderer2D::openWindow(CWindow* window)
+bool CRenderer2D::openWindow(AWindow* window)
 {
-    m_window = SDL_CreateWindow(window->title(),
-                                SDL_WINDOWPOS_UNDEFINED,
-                                SDL_WINDOWPOS_UNDEFINED,
-                                window->width(),
-                                window->height(),
-                                SDL_WINDOW_SHOWN);
-
-    if (m_window == nullptr)
+    if (window == nullptr)
     {
         // In the case that the window could not be made...
-        _DEBUG("Could not create window: %s", SDL_GetError());
+        _DEBUG("Window is NULL");
 
         return false;
     }
 
     _DEBUG("Window size: %d, %d", window->width(), window->height());
 
-    s_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+    s_renderer = SDL_CreateRenderer(dynamic_cast<CSDLWindow*>(window)->sdlWindow(), -1, SDL_RENDERER_ACCELERATED);
     if (s_renderer == nullptr)
     {
         _DEBUG("Could not create renderer: %s", SDL_GetError());
         return false;
     }
-
-    window->stateChanged().connect([&](bool isFull) ->void {
-        SDL_SetWindowFullscreen(m_window, (isFull? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
-    });
 
     return true;
 }

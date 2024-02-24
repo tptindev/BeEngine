@@ -21,7 +21,7 @@ bool CRenderer3D::ready()
     return false;
 }
 
-bool CRenderer3D::openWindow(CWindow* window)
+bool CRenderer3D::openWindow(AWindow* window)
 {
     return false;
 }
