@@ -2,13 +2,26 @@
 #include <SDL_render.h>
 #include <SDL_image.h>
 
-CButton::CButton(const char* src, CObject *parent) : CWidget(parent)
+CButton::CButton(CObject *parent) : CWidget(parent)
 {
-    m_texture = nullptr;
-    m_texture = IMG_LoadTexture(nullptr, src);
 }
 
-bool CButton::handleEvent(const SDL_Event *event)
+bool CTextButton::handleEvent(const SDL_Event *event)
 {
     return false;
+}
+
+void CTextButton::init()
+{
+
+}
+
+void CTextButton::update()
+{
+
+}
+
+void CTextButton::render()
+{
+
 }

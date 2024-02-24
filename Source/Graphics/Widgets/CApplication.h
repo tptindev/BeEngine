@@ -11,6 +11,8 @@ public:
     int execute();
     void quit();
 
+    CWindow *window();
+
 private:
     CWindow* m_window;
 };

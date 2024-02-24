@@ -55,7 +55,15 @@ void CWindow::initialize()
         return;
     }
 
-    _DEBUG("Window size: %d, %d", width(), height());
+}
+
+void CWindow::destroy()
+{
+    SDL_DestroyWindow(m_sdl_window);
+    if(m_sdl_window == nullptr)
+    {
+        _DEBUG("SDL Window is Destroyed");
+    }
 }
 
 SDL_Window *CWindow::sdlWindow()

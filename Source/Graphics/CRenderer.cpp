@@ -55,7 +55,6 @@ bool CRenderer::openWindow(CWindow* window)
 bool CRenderer::destroyRenderer()
 {
     SDL_DestroyRenderer(s_renderer);
-    SDL_DestroyWindow(m_window);
     return (s_renderer == nullptr);
 }
 

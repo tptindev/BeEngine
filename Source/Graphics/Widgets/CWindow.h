@@ -17,6 +17,7 @@ public:
     void toggleIsFull();
 
     void initialize();
+    void destroy();
 
     SDL_Window* sdlWindow();
     SDL_Surface* sdlSurface();

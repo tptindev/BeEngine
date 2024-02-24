@@ -5,7 +5,7 @@
 #include "CTimer.h"
 #include <CSignal.h>
 
-class CWindow;
+class CApplication;
 class CRenderer;
 class CEngine: public CObject
 {
@@ -17,6 +17,7 @@ private:
 
     CRenderer* m_renderer = nullptr;
     CTimer m_timer;
+    CApplication* m_app;
 
 
     // signals:
@@ -34,7 +35,7 @@ public:
     void operator=(const CEngine &) = delete;
     static CEngine *instance();
     
-    bool initialize(CWindow* window);
+    bool initialize(CApplication* app);
     void registerEvent();
     void loop();
     void clean();

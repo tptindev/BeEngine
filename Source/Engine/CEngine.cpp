@@ -3,9 +3,9 @@
 #include <CMemoryManager.h>
 #include <CRenderer.h>
 #include <Widgets/CWindow.h>
+#include <Widgets/CApplication.h>
 #include <CEventDispatcher.h>
 #include <SDL_timer.h>
-
 CEngine* CEngine::s_instance = nullptr;
 bool CEngine::s_running = false;
 CEngine::CEngine(CObject *parent)
@@ -44,24 +44,26 @@ CEngine *CEngine::instance()
     return s_instance = (s_instance == nullptr)? new CEngine(): s_instance;
 }
 
-bool CEngine::initialize(CWindow* window)
+bool CEngine::initialize(CApplication* app)
 {
+    m_app = app;
     if (!m_renderer->ready())
         return false;
 
     // [1] init SDL and create the Game Window and Renderer
-    if (!m_renderer->openWindow(window))
+    if (!m_renderer->openWindow(app->window()))
     {
         return false;
     }
 
-    m_window_full.connect(std::bind(&CWindow::toggleIsFull, window));
+    m_window_full.connect(std::bind(&CWindow::toggleIsFull, app->window()));
 
     // [2] register event handler
     registerEvent();
 
     // [3] start game engine
     s_running = true;
+
 
     return true;
 }
@@ -124,6 +126,7 @@ void CEngine::loop()
 void CEngine::clean()
 {
     m_renderer->destroyRenderer();
+    m_app->window()->destroy();
     _DEBUG("Game Release Resource");
 }
 

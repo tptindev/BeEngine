@@ -14,8 +14,15 @@ public:
     void setY(float newY);
     float z() const;
     void setZ(float newZ);
+    float width() const;
+    void setWidth(float newWidth);
+    float height() const;
+    void setHeight(float newHeight);
+
 protected:
     float m_x, m_y, m_z;
+    float m_width, m_height;
+
 };
 
 #endif // CWIDGET_H

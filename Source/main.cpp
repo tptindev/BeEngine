@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     CWindow window("BeEngine", 720, 480);
     CApplication app(&window);
     
-    bool initialized = CEngine::instance()->initialize(&window);
+    bool initialized = CEngine::instance()->initialize(&app);
     if(initialized)
     {
         CEngine::instance()->loop();
