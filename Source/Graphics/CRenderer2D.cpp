@@ -93,7 +93,7 @@ void CRenderer2D::quit()
 
 void CRenderer2D::beginDraw()
 {
-    SDL_SetRenderDrawColor(s_renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
     SDL_RenderClear(s_renderer);
 }
 

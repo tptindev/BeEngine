@@ -8,4 +8,4 @@ target_include_directories(input_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-target_link_libraries(input_module PRIVATE utils_module SDL2)
+target_link_libraries(input_module PRIVATE utils_module core_module SDL2)

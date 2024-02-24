@@ -1,12 +1,18 @@
 #ifndef CBUTTON_H
 #define CBUTTON_H
 
-#include <CObject.h>
+#include "CWidget.h"
+#include "CMouseArea.h"
 
-class CButton : public CObject
+class SDL_Texture;
+class CButton : public CWidget
 {
+private:
+    SDL_Texture* m_texture;
+    CMouseArea* m_mouse;
+
 public:
-    CButton();
+    CButton(const char* src, CObject *parent = nullptr);
 };
 
 #endif // CBUTTON_H

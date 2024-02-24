@@ -8,7 +8,7 @@ class CWindow : public CObject
 {
 public:
     CWindow();
-    CWindow(const char *m_title, int m_width, int m_height, bool m_is_full = false);
+    explicit CWindow(const char *m_title, int m_width, int m_height, bool m_is_full = false);
     ~CWindow();
 
     void toggleIsFull();

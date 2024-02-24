@@ -1,12 +1,16 @@
 #ifndef CMOUSEAREA_H
 #define CMOUSEAREA_H
 
-#include <CObject.h>
+#include <CEventReceiver.h>
 
-class CMouseArea : public CObject
+class CMouseArea : public CEventReceiver
 {
 public:
-    CMouseArea();
+    CMouseArea(CObject *parent = nullptr);
+
+    // CEventReceiver interface
+public:
+    virtual bool handleEvent(const SDL_Event *event) override;
 };
 
 #endif // CMOUSEAREA_H

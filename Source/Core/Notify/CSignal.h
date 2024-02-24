@@ -35,6 +35,22 @@ public:
         return true;
     }
 
+    bool disconnect(const SlotType& slot)
+    {
+        _DEBUG("DISCONNECT SLOT [%p] <-> SIGNAL [%p]", &slot, this);
+        typename std::vector<SlotType>::iterator it = m_slots.begin();
+        while (it != m_slots.end())
+        {
+            if(&(*it) == &slot)
+            {
+                m_slots.erase(it);
+                return true;
+            }
+            ++it;
+        }
+        return false;
+    }
+
     void emit(Args&&... args)
     {
         _DEBUG("EMIT SIGNAL [%p]", this);

@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-    CWindow window("xin_chao", 720, 480);
+    CWindow window("BeEngine", 720, 480);
     bool initialized = CEngine::instance()->initialize(&window);
     if(initialized)
     {

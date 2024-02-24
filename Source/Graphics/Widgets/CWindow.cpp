@@ -1,11 +1,11 @@
 #include "CWindow.h"
 
 CWindow::CWindow()
-    :m_title("Undefined"), m_width(720), m_height(480), m_is_full(false) {}
+    :m_title("Undefined"), m_width(720), m_height(480), m_is_full(false), m_active(true) {}
 
 CWindow::CWindow(const char *m_title, int m_width, int m_height, bool m_is_full)
     : m_title(m_title), m_width(m_width), m_height(m_height),
-    m_is_full(m_is_full)
+    m_is_full(m_is_full), m_active(true)
 {}
 
 CWindow::~CWindow()
