@@ -6,6 +6,9 @@ CButton::CButton(const char* src, CObject *parent) : CWidget(parent)
 {
     m_texture = nullptr;
     m_texture = IMG_LoadTexture(nullptr, src);
+}
 
-    m_mouse = new CMouseArea(this);
+bool CButton::handleEvent(const SDL_Event *event)
+{
+    return false;
 }

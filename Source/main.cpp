@@ -2,10 +2,13 @@
 #include <LoggerDefines.h>
 #include <CEngine.h>
 #include <Widgets/CWindow.h>
+#include <Widgets/CApplication.h>
 
 int main(int argc, char *argv[])
 {
     CWindow window("BeEngine", 720, 480);
+    CApplication app(&window);
+
     bool initialized = CEngine::instance()->initialize(&window);
     if(initialized)
     {

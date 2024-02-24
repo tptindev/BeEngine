@@ -4,10 +4,10 @@
 #include <CObject.h>
 #include <SDL_events.h>
 
-class CEventReceiver : public CObject
+class CEventReceiver
 {
 public:
-    CEventReceiver(CObject *parent = nullptr);
+    CEventReceiver();
 
     virtual bool handleEvent(const SDL_Event* event);
 };

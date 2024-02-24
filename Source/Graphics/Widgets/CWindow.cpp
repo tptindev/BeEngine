@@ -1,4 +1,6 @@
 #include "CWindow.h"
+#include <SDL.h>
+#include <SDL_image.h>
 
 CWindow::CWindow()
     :m_title("Undefined"), m_width(720), m_height(480), m_is_full(false), m_active(true) {}
@@ -41,6 +43,16 @@ int CWindow::x() const
 int CWindow::y() const
 {
     return m_y;
+}
+
+SDL_Window *CWindow::sdlWindow()
+{
+    return m_sdl_window;
+}
+
+SDL_Surface *CWindow::sdlSurface()
+{
+    return m_sdl_window_surface;
 }
 
 void CWindow::toggleIsFull()

@@ -1,6 +1,6 @@
 #include "CEventReceiver.h"
 
-CEventReceiver::CEventReceiver(CObject *parent) : CObject(parent)
+CEventReceiver::CEventReceiver()
 {}
 
 bool CEventReceiver::handleEvent(const SDL_Event*event)
