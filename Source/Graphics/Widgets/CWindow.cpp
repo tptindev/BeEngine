@@ -1,6 +1,7 @@
 #include "CWindow.h"
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 CWindow::CWindow(CObject *parent): CObject(parent)
 {
@@ -22,7 +23,9 @@ CWindow::CWindow(const char *title, int width, int height, CObject *parent) : CO
 
 CWindow::~CWindow()
 {
-
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
 }
 
 void CWindow::initialize()
@@ -37,6 +40,12 @@ void CWindow::initialize()
     if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
     {
         _DEBUG("Unable to initialize SDL Image: %s", SDL_GetError());
+        return;
+    }
+
+    if (TTF_Init() < 0)
+    {
+        _DEBUG("Unable to initialize SDL TTF: %s", SDL_GetError());
         return;
     }
 

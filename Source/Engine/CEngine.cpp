@@ -47,8 +47,6 @@ CEngine *CEngine::instance()
 bool CEngine::initialize(CApplication* app)
 {
     m_app = app;
-    if (!m_renderer->ready())
-        return false;
 
     // [1] init SDL and create the Game Window and Renderer
     if (!m_renderer->openWindow(app->window()))
@@ -132,8 +130,6 @@ void CEngine::clean()
 
 void CEngine::quit()
 {
-    m_renderer->quit();
-
     // Get elapsed time
     _DEBUG("Elapsed milliseconds: %lld",m_timer.elapsed_milliseconds());
     _DEBUG("Elapsed seconds: %lf",m_timer.elapsed_seconds());

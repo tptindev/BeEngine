@@ -27,11 +27,6 @@ void CRenderer::initialize()
 
 }
 
-bool CRenderer::ready()
-{
-    return true;
-}
-
 bool CRenderer::openWindow(CWindow* window)
 {
     if (window == nullptr)
@@ -56,12 +51,6 @@ bool CRenderer::destroyRenderer()
 {
     SDL_DestroyRenderer(s_renderer);
     return (s_renderer == nullptr);
-}
-
-void CRenderer::quit()
-{
-    IMG_Quit();
-    SDL_Quit();
 }
 
 void CRenderer::beginDraw()
