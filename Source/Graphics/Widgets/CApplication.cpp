@@ -8,9 +8,9 @@ CApplication::CApplication(AWindow *window)
 
 }
 
-void CApplication::execute()
+int CApplication::execute()
 {
-
+    return 0;
 }
 
 void CApplication::quit()

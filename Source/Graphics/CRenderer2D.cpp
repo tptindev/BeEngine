@@ -29,19 +29,6 @@ void CRenderer2D::initialize()
 
 bool CRenderer2D::ready()
 {
-    _DEBUG("Game Init");
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
-        _DEBUG("Unable to initialize SDL: %s", SDL_GetError());
-        return false;
-    }
-
-    if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
-    {
-        _DEBUG("Unable to initialize SDL Image: %s", SDL_GetError());
-        return false;
-    }
-
     return true;
 }
 
@@ -54,8 +41,6 @@ bool CRenderer2D::openWindow(AWindow* window)
 
         return false;
     }
-
-    _DEBUG("Window size: %d, %d", window->width(), window->height());
 
     s_renderer = SDL_CreateRenderer(dynamic_cast<CSDLWindow*>(window)->sdlWindow(), -1, SDL_RENDERER_ACCELERATED);
     if (s_renderer == nullptr)

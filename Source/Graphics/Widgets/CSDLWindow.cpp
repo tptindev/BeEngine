@@ -27,10 +27,18 @@ CSDLWindow::~CSDLWindow()
 
 void CSDLWindow::initialize()
 {
-    m_state_changed.connect([&](bool isFull) ->void {
-        SDL_SetWindowFullscreen(m_sdl_window, (isFull? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
-    });
+    _DEBUG("Window Init");
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    {
+        _DEBUG("Unable to initialize SDL: %s", SDL_GetError());
+        return;
+    }
 
+    if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
+    {
+        _DEBUG("Unable to initialize SDL Image: %s", SDL_GetError());
+        return;
+    }
 
     m_sdl_window = SDL_CreateWindow(title(),
                                     SDL_WINDOWPOS_UNDEFINED,
@@ -38,7 +46,6 @@ void CSDLWindow::initialize()
                                     width(),
                                     height(),
                                     SDL_WINDOW_SHOWN);
-
 
     if (m_sdl_window == nullptr)
     {
@@ -69,6 +76,6 @@ void CSDLWindow::update_window_surface()
 void CSDLWindow::toggleIsFull()
 {
     m_is_full = !m_is_full;
-    m_state_changed.emit(std::move(m_is_full));
+    SDL_SetWindowFullscreen(m_sdl_window, (m_is_full? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
 }
 

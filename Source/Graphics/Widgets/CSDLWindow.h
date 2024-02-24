@@ -26,9 +26,6 @@ private:
     SDL_Window* m_sdl_window {nullptr};
     SDL_Surface* m_sdl_window_surface {nullptr};
 
-private: // signals declare
-    CSignal<void, bool> m_state_changed;
-
     // AWindow interface
 public:
     virtual void update_window_surface() override;

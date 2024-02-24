@@ -8,7 +8,7 @@ class CApplication
 public:
     CApplication(AWindow* window);
 
-    void execute();
+    int execute();
     void quit();
 
 private:
