@@ -49,7 +49,7 @@ bool CEngine::initialize(CApplication* app)
     m_app = app;
 
     // [1] init SDL and create the Game Window and Renderer
-    if (!m_renderer->openWindow(app->window()))
+    if (!m_renderer->initialize(app->window()))
     {
         return false;
     }
@@ -123,7 +123,7 @@ void CEngine::loop()
 
 void CEngine::clean()
 {
-    m_renderer->destroyRenderer();
+    m_renderer->destroy();
     m_app->window()->destroy();
     _DEBUG("Game Release Resource");
 }

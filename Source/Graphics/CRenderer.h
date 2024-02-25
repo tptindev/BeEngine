@@ -21,9 +21,8 @@ public:
 
     // ARenderer interface
 public:
-    void initialize();
-    bool openWindow(CWindow* window);
-    bool destroyRenderer();
+    bool initialize(CWindow* window);
+    bool destroy();
     void beginDraw();
     void endDraw();
 };

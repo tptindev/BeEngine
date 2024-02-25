@@ -22,12 +22,8 @@ SDL_Renderer *CRenderer::renderer()
     return s_renderer;
 }
 
-void CRenderer::initialize()
-{
 
-}
-
-bool CRenderer::openWindow(CWindow* window)
+bool CRenderer::initialize(CWindow* window)
 {
     if (window == nullptr)
     {
@@ -47,7 +43,7 @@ bool CRenderer::openWindow(CWindow* window)
     return true;
 }
 
-bool CRenderer::destroyRenderer()
+bool CRenderer::destroy()
 {
     SDL_DestroyRenderer(s_renderer);
     return (s_renderer == nullptr);
