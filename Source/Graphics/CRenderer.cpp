@@ -37,7 +37,7 @@ bool CRenderer::openWindow(CWindow* window)
         return false;
     }
 
-    s_renderer = SDL_CreateRenderer(dynamic_cast<CWindow*>(window)->sdlWindow(), -1, SDL_RENDERER_ACCELERATED);
+    s_renderer = SDL_CreateRenderer(window->sdlWindow(), -1, SDL_RENDERER_ACCELERATED);
     if (s_renderer == nullptr)
     {
         _DEBUG("Could not create renderer: %s", SDL_GetError());
