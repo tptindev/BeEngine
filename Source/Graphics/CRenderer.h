@@ -24,6 +24,7 @@ public:
     bool initialize(CWindow* window);
     bool destroy();
     void beginDraw();
+    void quit();
     void endDraw();
 };
 

@@ -7,6 +7,7 @@ class CPoint;
 class CRect;
 class CPolygon;
 class CImage;
+class CText;
 
 class CPainter
 {
@@ -22,6 +23,7 @@ public:
     void drawEllipse(int x, int y, int width, int height) {};
     void drawLine(CLine* line) {}
     void drawLine(int x1, int y1, int x2, int y2) {}
+    void drawText(const char* text, int x, int y);
 
 
 

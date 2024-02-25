@@ -4,6 +4,7 @@
 #include "Widgets/CWindow.h"
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 
 CRenderer *CRenderer::s_instance = nullptr;
 CRenderer::CRenderer()
@@ -33,6 +34,14 @@ void CRenderer::beginDraw()
 {
     SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
     SDL_RenderClear(m_renderer);
+    SDL_RenderClear(m_renderer);
+}
+
+void CRenderer::quit()
+{
+    IMG_Quit();
+    TTF_Quit();
+    SDL_Quit();
 }
 
 void CRenderer::endDraw()

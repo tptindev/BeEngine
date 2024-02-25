@@ -19,6 +19,9 @@ public:
     float height() const;
     void setHeight(float newHeight);
 
+    virtual void init() = 0;
+    virtual void update() = 0;
+    virtual void render() = 0;
 protected:
     float m_x, m_y, m_z;
     float m_width, m_height;

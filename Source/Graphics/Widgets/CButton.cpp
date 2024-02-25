@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include <SDL_surface.h>
 #include <SDL_pixels.h>
+#include <SDL_ttf.h>
 #include <LoggerDefines.h>
 #include "CPainter.h"
 
@@ -44,34 +45,36 @@ void CTextButton::update()
 void CTextButton::render()
 {
     CPainter painter(m_app->window());
-    painter.drawRect(m_area.x,
-                     m_area.y,
-                     m_area.w,
-                     m_area.h,
+    painter.drawRect(x(),
+                     y(),
+                     width(),
+                     height(),
                      m_current_color.r,
                      m_current_color.g,
                      m_current_color.b,
                      m_current_color.a);
+    painter.drawText(m_text, x() + (width() / 2), y() + (height()/2));
+
 }
 
-bool CTextButton::IsWithinBounds(int x, int y)
+bool CTextButton::IsWithinBounds(int _x, int _y)
 {
     // Too far left
-    if (x < m_area.x) return false;
+    if (_x < x()) return false;
 
     // Too far right
-    if (x > m_area.x + m_area.w) return false;
+    if (_x > x() + width()) return false;
 
     // Too high
-    if (y < m_area.y) return false;
+    if (_y < y()) return false;
 
     // Too low
-    if (y > m_area.y + m_area.h) return false;
+    if (_y > y() + height()) return false;
 
     // Inside rectangle
     return true;
 }
 
-CTextButton::CTextButton(CApplication *app, CObject *parent) : CButton(app, parent)
+CTextButton::CTextButton(CApplication *app, const char* text, CObject *parent) : CButton(app, parent), m_text(text)
 {
 }

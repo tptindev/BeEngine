@@ -117,10 +117,20 @@ std::vector<CLayer *> CWindow::layers() const
     return m_layers;
 }
 
+CSignal<void, int, int>& CWindow::windowSizeChanged()
+{
+    return m_window_size_changed;
+}
+
 void CWindow::toggleIsFull()
 {
     m_is_full = !m_is_full;
-    SDL_SetWindowFullscreen(m_sdl_window, (m_is_full? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
+    int status = SDL_SetWindowFullscreen(m_sdl_window, (m_is_full? SDL_WINDOW_FULLSCREEN_DESKTOP: 0));
+    if(status == 0)
+    {
+        SDL_GetWindowSize(m_sdl_window, &m_width, &m_height);
+        m_window_size_changed.emit(std::move(m_width), std::move(m_height));
+    }
 }
 
 const char *CWindow::title() const

@@ -36,6 +36,9 @@ public:
     void registerLayer(CLayer* layer);
     std::vector<CLayer *> layers() const;
 
+
+    CSignal<void, int, int>& windowSizeChanged();
+
 protected:
     const char* m_title;
     int m_width, m_height;
@@ -49,6 +52,8 @@ private:
     SDL_Window* m_sdl_window {nullptr};
     SDL_Surface* m_sdl_window_surface {nullptr};
     SDL_Renderer* m_sdl_renderer {nullptr};
+
+    CSignal<void, int, int> m_window_size_changed;
 };
 
 #endif // CWINDOW_H
