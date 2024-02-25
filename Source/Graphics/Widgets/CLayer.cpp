@@ -1,13 +1,25 @@
 #include "CLayer.h"
-#include "CEventDispatcher.h"
+#include <CEventDispatcher.h>
+#include <CEventReceiver.h>
+#include <SDL_events.h>
 
-CLayer::CLayer()
-    :m_dispatcher(CEventDispatcher::instance())
+CLayer::CLayer(CApplication* app)
+    :m_app(app)
 {
 
 }
 
-void CLayer::subcribeToEvent(CEventReceiver *receiver)
+bool CLayer::handleEvent(const SDL_Event* event)
 {
-    m_dispatcher->addReceiver(receiver);
+    for (const auto Handler : m_receivers) {
+        if (Handler->handleEvent(event)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void CLayer::subscribeToEvents(AEventReceiver *receiver)
+{
+    m_receivers.push_back(receiver);
 }

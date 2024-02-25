@@ -6,6 +6,8 @@
 #include <Widgets/CApplication.h>
 #include <CEventDispatcher.h>
 #include <SDL_timer.h>
+#include <Widgets/CLayer.h>
+
 CEngine* CEngine::s_instance = nullptr;
 bool CEngine::s_running = false;
 CEngine::CEngine(CObject *parent)
@@ -23,11 +25,23 @@ CEngine::~CEngine()
 void CEngine::handle_events()
 {
     CEventDispatcher::instance()->dispatchEvent();
+    for(CLayer* layer: m_app->window()->layers())
+    {
+        SDL_Event event;
+        CEventDispatcher::instance()->nextEvent(event);
+        if(layer->handleEvent(&event))
+        {
+            continue;
+        }
+    }
 }
 
 void CEngine::update(float dt)
 {
-
+    for(CLayer* layer: m_app->window()->layers())
+    {
+        layer->update(dt);
+    }
 }
 
 void CEngine::render()
@@ -35,6 +49,10 @@ void CEngine::render()
     m_renderer->beginDraw();
 
     // Render code goes here
+    for(CLayer* layer: m_app->window()->layers())
+    {
+        layer->render();
+    }
 
     m_renderer->endDraw();
 }

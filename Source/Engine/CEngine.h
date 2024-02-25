@@ -4,7 +4,9 @@
 #include "CObject.h"
 #include "CTimer.h"
 #include <CSignal.h>
+#include <vector>
 
+class CLayer;
 class CApplication;
 class CRenderer;
 class CEngine: public CObject
@@ -18,7 +20,6 @@ private:
     CRenderer* m_renderer = nullptr;
     CTimer m_timer;
     CApplication* m_app;
-
 
     // signals:
     CSignal<void, bool> m_window_full;

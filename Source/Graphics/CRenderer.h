@@ -8,16 +8,16 @@ class CRenderer
 {
 private:
     static CRenderer* s_instance;
-    static SDL_Renderer* s_renderer;
     CRenderer();
-    SDL_Window* m_window;
+
+    SDL_Renderer* m_renderer;
+    CWindow* m_window;
 public:
     CRenderer(const CRenderer &) = delete; // copy constructor
     CRenderer(CRenderer &&) = delete; // move constructor
     CRenderer &operator=(const CRenderer &) = delete;
     CRenderer &operator=(CRenderer &&) = delete;
     static CRenderer *instance();
-    static SDL_Renderer *renderer();
 
     // ARenderer interface
 public:

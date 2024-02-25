@@ -20,7 +20,7 @@ CTexturePool *CTexturePool::instance()
     return s_instance = (s_instance == nullptr)? new CTexturePool(): s_instance;
 }
 
-bool CTexturePool::load(const char *id, const char *src)
+bool CTexturePool::load(CWindow* window, const char *id, const char *src)
 {
     bool status = false;
     if(m_textures.find(id) != m_textures.end())
@@ -30,7 +30,7 @@ bool CTexturePool::load(const char *id, const char *src)
     else
     {
         _DEBUG("TextureID: %s, Texture Path: %s", id, src);
-        if(CRenderer::renderer() == nullptr)
+        if(window->sdlRenderer() == nullptr)
         {
             _DEBUG("RENDERER NULL");
             status = false;
@@ -43,7 +43,7 @@ bool CTexturePool::load(const char *id, const char *src)
             status = false;
         }
         
-        texture = SDL_CreateTextureFromSurface(CRenderer::renderer(), surface);
+        texture = SDL_CreateTextureFromSurface(window->sdlRenderer(), surface);
         SDL_FreeSurface(surface);
         m_textures[id] = texture;
     }

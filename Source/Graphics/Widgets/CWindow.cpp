@@ -64,15 +64,27 @@ void CWindow::initialize()
         return;
     }
 
+    m_sdl_window_surface = SDL_GetWindowSurface(m_sdl_window);
+    if (m_sdl_window_surface == nullptr)
+    {
+        // In the case that the window could not be made...
+        _DEBUG("Could not get window surface: %s", SDL_GetError());
+
+        return;
+    }
+
+    m_sdl_renderer = SDL_CreateRenderer(m_sdl_window, -1, SDL_RENDERER_ACCELERATED);
+    if (m_sdl_renderer == nullptr)
+    {
+        _DEBUG("Could not create renderer: %s", SDL_GetError());
+        return;
+    }
 }
 
 void CWindow::destroy()
 {
     SDL_DestroyWindow(m_sdl_window);
-    if(m_sdl_window == nullptr)
-    {
-        _DEBUG("SDL Window is Destroyed");
-    }
+    _DEBUG("SDL Window [%p] is Destroyed", m_sdl_window);
 }
 
 SDL_Window *CWindow::sdlWindow()
@@ -85,9 +97,24 @@ SDL_Surface *CWindow::sdlSurface()
     return m_sdl_window_surface;
 }
 
+SDL_Renderer *CWindow::sdlRenderer()
+{
+    return m_sdl_renderer;
+}
+
 void CWindow::update_window_surface()
 {
     SDL_UpdateWindowSurface(m_sdl_window);
+}
+
+void CWindow::registerLayer(CLayer *layer)
+{
+    m_layers.push_back(layer);
+}
+
+std::vector<CLayer *> CWindow::layers() const
+{
+    return m_layers;
 }
 
 void CWindow::toggleIsFull()

@@ -3,6 +3,7 @@
 
 
 class CWindow;
+class SDL_Surface;
 class CApplication
 {
 public:
@@ -12,6 +13,8 @@ public:
     void quit();
 
     CWindow *window();
+    SDL_Surface *windowSurface();
+
 
 private:
     CWindow* m_window;

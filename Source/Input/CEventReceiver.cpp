@@ -1,9 +1,6 @@
 #include "CEventReceiver.h"
 
-CEventReceiver::CEventReceiver()
-{}
-
-bool CEventReceiver::handleEvent(const SDL_Event*event)
+bool AEventReceiver::handleEvent(const SDL_Event*event)
 {
     return false;
 }

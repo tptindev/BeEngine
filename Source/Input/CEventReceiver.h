@@ -4,11 +4,9 @@
 #include <CObject.h>
 #include <SDL_events.h>
 
-class CEventReceiver
+class AEventReceiver
 {
 public:
-    CEventReceiver();
-
     virtual bool handleEvent(const SDL_Event* event);
 };
 

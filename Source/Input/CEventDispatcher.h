@@ -7,7 +7,6 @@
 #include <functional>
 #include <unordered_map>
 
-class CEventReceiver;
 typedef std::function<void(SDL_Event&)> EventHandler;
 class CEventDispatcher
 {
@@ -16,8 +15,8 @@ private:
     static CEventDispatcher *s_instance;
 
     std::mutex              m_mutex;
+    std::queue<SDL_Event>  m_queue_events;
     std::unordered_map<Uint32, EventHandler> m_event_handlers;
-    std::queue<CEventReceiver*> m_receivers;
 
 public:
     CEventDispatcher(const CEventDispatcher &) = delete;
@@ -26,8 +25,8 @@ public:
     CEventDispatcher &operator=(CEventDispatcher &&) = delete;
     static CEventDispatcher *instance();
 
+    bool nextEvent(SDL_Event&);
     void dispatchEvent();
     void addEventListener(SDL_EventType, EventHandler);
-    void addReceiver(CEventReceiver*);
 };
 #endif // CEVENTDISPATCHER_H

@@ -2,6 +2,7 @@
 #define CTEXTUREPOOL_H
 
 #include <unordered_map>
+#include <Widgets/CWindow.h>
 
 class SDL_Texture;
 class CTexturePool
@@ -19,7 +20,7 @@ public:
     ~CTexturePool();
     static CTexturePool *instance();
 
-    bool load(const char *id, const char *src);
+    bool load(CWindow* window, const char *id, const char *src);
     void remove(const char *id);
 };
 

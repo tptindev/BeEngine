@@ -1,27 +1,33 @@
 #ifndef CPAINTER_H
 #define CPAINTER_H
 
-
+class CWindow;
 class CLine;
 class CPoint;
 class CRect;
 class CPolygon;
 class CImage;
 
-class C2DPainter
+class CPainter
 {
 public:
-    C2DPainter();
+    CPainter(CWindow* window);
 
     void drawImage(CRect* target, CImage* image, CRect* source) {}
     void drawConvexPolygon(CPolygon* polygon) {}
     void drawConvexPolygon(CPoint* points, int pointCount) {}
     void drawRect(int x, int y, CRect* rectangle) {};
-    void drawRect(int x, int y, int width, int height) {};
+    void drawRect(int x, int y, int width, int height, int r, int g, int b, int a = 255);
     void drawEllipse(int x, int y, CRect* rectangle) {};
     void drawEllipse(int x, int y, int width, int height) {};
     void drawLine(CLine* line) {}
     void drawLine(int x1, int y1, int x2, int y2) {}
+
+
+
+
+private:
+    CWindow* m_window;
 };
 
 #endif // CPAINTER_H
