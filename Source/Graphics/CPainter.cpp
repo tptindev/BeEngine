@@ -50,8 +50,12 @@ void CPainter::drawText(const char* text, int x, int y)
         SDL_Rect Source { 0, 0, surface->w, surface->h };
         SDL_Rect Destination { x - Source.w/2, y - Source.h/2, Source.w, Source.h };
         SDL_RenderCopy(m_window->sdlRenderer(), texture, &Source, &Destination);
+        SDL_FreeSurface(surface);
+        SDL_DestroyTexture(texture);
         TTF_CloseFont(font);
         font = NULL;
+        surface = NULL;
+        texture = NULL;
     }
     else
     {
