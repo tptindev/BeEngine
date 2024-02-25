@@ -3,7 +3,7 @@
 
 CHomeUI::CHomeUI(CApplication* app): CLayer(app)
 {
-    int spacing = 25;
+    static int spacing = 25;
     {
         m_start_btn = new CTextButton(app, "Start");
         m_start_btn->init();
@@ -46,6 +46,8 @@ CHomeUI::CHomeUI(CApplication* app): CLayer(app)
             }
         });
     }
+
+    // required
     this->subscribeToEvents(m_start_btn);
     this->subscribeToEvents(m_options_btn);
     this->subscribeToEvents(m_quit_btn);
@@ -58,7 +60,7 @@ CHomeUI::CHomeUI(CApplication* app): CLayer(app)
 
         // options btn
         m_options_btn->setX(m_start_btn->x());
-        m_options_btn->setY(m_start_btn->y() + m_start_btn->height() + 25);
+        m_options_btn->setY(m_start_btn->y() + m_start_btn->height() + spacing);
 
         // quit btn
         m_quit_btn->setX(w - m_quit_btn->width());
