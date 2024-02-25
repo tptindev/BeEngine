@@ -10,10 +10,12 @@ public:
     explicit CHomeUI(CApplication* app);
 private:
     CTextButton *m_start_btn;
+    CTextButton *m_options_btn;
     CTextButton *m_quit_btn;
 
 private:
     void start();
+    void options();
     void quit();
 
     // CLayer interface
