@@ -19,7 +19,7 @@ public:
     bool handleEvent(const SDL_Event*);
     void subscribeToEvents(AEventReceiver*);
 
-private:
+protected:
     std::vector<AEventReceiver*> m_receivers;
     CApplication* m_app;
 };

@@ -24,7 +24,7 @@ public:
 
     bool connect(const SlotType& slot)
     {
-        _DEBUG("CONNECT SLOT [%p] -> SIGNAL [%p]", &slot, this);
+//        _DEBUG("CONNECT SLOT [%p] -> SIGNAL [%p]", &slot, this);
         typename std::vector<SlotType>::iterator it = m_slots.begin();
         while (it != m_slots.end())
         {
@@ -37,7 +37,7 @@ public:
 
     bool disconnect(const SlotType& slot)
     {
-        _DEBUG("DISCONNECT SLOT [%p] <-> SIGNAL [%p]", &slot, this);
+//        _DEBUG("DISCONNECT SLOT [%p] <-> SIGNAL [%p]", &slot, this);
         typename std::vector<SlotType>::iterator it = m_slots.begin();
         while (it != m_slots.end())
         {
@@ -53,7 +53,7 @@ public:
 
     void emit(Args&&... args)
     {
-        _DEBUG("EMIT SIGNAL [%p]", this);
+//        _DEBUG("EMIT SIGNAL [%p]", this);
         for (const auto& slot :m_slots)
         {
             slot(args...);

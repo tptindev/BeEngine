@@ -12,13 +12,18 @@ CButton::CButton(CApplication* app, CObject *parent) : CWidget(parent), m_app(ap
 
 }
 
+CSignal<void, CButton::E_BTN_STATE> &CButton::stateChanged()
+{
+    return m_state_changed;
+}
+
 bool CTextButton::handleEvent(const SDL_Event *event)
 {
     if (event->type == SDL_MOUSEBUTTONDOWN &&
         event->button.button == SDL_BUTTON_LEFT &&
         isHovered)
     {
-        m_app->quit();
+        stateChanged().emit(E_BTN_STATE::CLICKED);
     }
     else if (event->type == SDL_MOUSEMOTION)
     {
@@ -27,6 +32,7 @@ bool CTextButton::handleEvent(const SDL_Event *event)
             isHovered = !isHovered;
             update();
         }
+        stateChanged().emit(isHovered? E_BTN_STATE::HOVERED: E_BTN_STATE::NORMAL);
         return isHovered;
     }
     return false;

@@ -2,6 +2,7 @@
 #define CBUTTON_H
 
 #include <unordered_map>
+#include <CSignal.h>
 #include "CApplication.h"
 #include "CWidget.h"
 #include "CEventReceiver.h"
@@ -13,19 +14,23 @@ public:
     enum E_BTN_STATE: char
     {
         NORMAL,
-        PRESS,
+        PRESSED,
         PRESS_AND_HOLD,
-        CLICK,
-        RELEASE,
-        HOVER,
+        CLICKED,
+        RELEASED,
+        HOVERED,
         IN_ACTIVE
     };
 
     CButton(CApplication* app, CObject *parent = nullptr);
+    CSignal<void, E_BTN_STATE>& stateChanged();
 
 protected:
     CApplication* m_app { nullptr };
     SDL_Surface* m_window_Surface { nullptr };
+
+private:
+    CSignal<void, E_BTN_STATE> m_state_changed;
 
     // CWidget interface
 public:
