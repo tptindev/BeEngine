@@ -27,14 +27,14 @@ bool CRenderer::initialize(CWindow* window)
 bool CRenderer::destroy()
 {
     SDL_DestroyRenderer(m_renderer);
+    SDL_DestroyWindow(m_window->sdlWindow());
     return (m_renderer == nullptr);
 }
 
 void CRenderer::beginDraw()
 {
-    SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
-    SDL_RenderClear(m_renderer);
-    SDL_RenderClear(m_renderer);
+    SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255); // set backgroud (r,g,b)
+    SDL_RenderClear(m_renderer); // clear content with backgroud color
 }
 
 void CRenderer::quit()

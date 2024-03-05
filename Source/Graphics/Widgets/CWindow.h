@@ -1,6 +1,7 @@
 #ifndef CWINDOW_H
 #define CWINDOW_H
 
+#include <list>
 #include <CObject.h>
 #include <CSignal.h>
 
@@ -32,9 +33,9 @@ public:
     int y() const;
     bool is_full() const;
     bool active() const;
-    void update_window_surface();
+    void updateWindowSurface();
     void registerLayer(CLayer* layer);
-    std::vector<CLayer *> layers() const;
+    std::list<CLayer *>& layers();
 
 
     CSignal<void, int, int>& windowSizeChanged();
@@ -46,7 +47,7 @@ protected:
     bool m_is_full {false};
     bool m_active {true};
 
-    std::vector<CLayer*> m_layers;
+    std::list<CLayer*> m_layers;
 
 private:
     SDL_Window* m_sdl_window {nullptr};

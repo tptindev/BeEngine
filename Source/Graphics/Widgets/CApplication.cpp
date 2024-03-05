@@ -6,7 +6,7 @@
 CApplication::CApplication(CWindow *window)
     :m_window(window)
 {
-
+    _DEBUG("Start");
 }
 
 int CApplication::execute()

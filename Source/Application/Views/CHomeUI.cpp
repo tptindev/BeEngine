@@ -4,7 +4,7 @@
 CHomeUI::CHomeUI(CApplication* app): CLayer(app)
 {
     static int spacing = 25;
-    {
+    { // Define start button
         m_start_btn = new CTextButton(app, "Start");
         m_start_btn->init();
         m_start_btn->setWidth(200);
@@ -18,7 +18,7 @@ CHomeUI::CHomeUI(CApplication* app): CLayer(app)
             }
         });
     }
-    {
+    { // Define options button
         m_options_btn = new CTextButton(app, "Options");
         m_options_btn->init();
         m_options_btn->setWidth(200);
@@ -71,7 +71,7 @@ CHomeUI::CHomeUI(CApplication* app): CLayer(app)
 
 void CHomeUI::start()
 {
-
+    m_app->window()->layers().pop_front();
 }
 
 void CHomeUI::options()

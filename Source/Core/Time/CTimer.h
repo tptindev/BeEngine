@@ -8,6 +8,7 @@ class CTimer
     typedef std::chrono::time_point<std::chrono::high_resolution_clock> TimePointType;
 private:
     TimePointType m_time_point;
+
 public:
     CTimer();
 

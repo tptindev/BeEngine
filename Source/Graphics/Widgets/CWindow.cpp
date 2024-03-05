@@ -102,17 +102,17 @@ SDL_Renderer *CWindow::sdlRenderer()
     return m_sdl_renderer;
 }
 
-void CWindow::update_window_surface()
+void CWindow::updateWindowSurface()
 {
     SDL_UpdateWindowSurface(m_sdl_window);
 }
 
 void CWindow::registerLayer(CLayer *layer)
 {
-    m_layers.push_back(layer);
+    m_layers.push_front(layer);
 }
 
-std::vector<CLayer *> CWindow::layers() const
+std::list<CLayer *>& CWindow::layers()
 {
     return m_layers;
 }

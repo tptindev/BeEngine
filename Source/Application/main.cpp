@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[])
 {
-    CWindow window("BeEngine", 720, 480);
+    CWindow window("BeEngine", 980, 720);
     CApplication app(&window);
     CHomeUI UI(&app);
     CWorldUI World(&app);

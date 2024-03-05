@@ -142,12 +142,12 @@ void CEngine::loop()
 void CEngine::clean()
 {
     m_renderer->destroy();
-    m_app->window()->destroy();
     _DEBUG("Game Release Resource");
 }
 
 void CEngine::quit()
 {
+    m_renderer->quit();
     // Get elapsed time
     _DEBUG("Elapsed milliseconds: %lld",m_timer.elapsed_milliseconds());
     _DEBUG("Elapsed seconds: %lf",m_timer.elapsed_seconds());

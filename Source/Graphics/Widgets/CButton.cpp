@@ -35,6 +35,11 @@ bool CTextButton::handleEvent(const SDL_Event *event)
         stateChanged().emit(isHovered? E_BTN_STATE::HOVERED: E_BTN_STATE::NORMAL);
         return isHovered;
     }
+    else if (event->type == SDL_MOUSEBUTTONUP &&
+               isHovered)
+    {
+        stateChanged().emit(E_BTN_STATE::RELEASED);
+    }
     return false;
 }
 

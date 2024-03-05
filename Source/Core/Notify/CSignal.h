@@ -15,11 +15,11 @@ public:
 public:
     CSignal()
     {
-        _DEBUG("%s [%p]", __FUNCTION__, this);
+//        _DEBUG("%s [%p]", __FUNCTION__, this);
     }
     ~CSignal()
     {
-        _DEBUG("%s [%p]", __FUNCTION__, this);
+//        _DEBUG("%s [%p]", __FUNCTION__, this);
     }
 
     bool connect(const SlotType& slot)
